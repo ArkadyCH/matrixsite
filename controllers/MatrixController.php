@@ -9,7 +9,7 @@
 class MatrixController
 {
     public function actionDownload(){
-        echo 'Download me';
+        require_once(ROOT . '/views/download/download.php');
         return true;
     }
 }
