@@ -1,7 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Arkady
- * Date: 01.04.2018
- * Time: 16:10
+ * Маршруты ,возвращает массив с маршрутами в виде "путь для сравнения с url из адресной строки' => 'Имя контроллера / Имя экшена'
  */
+return array(
+  'download' => 'matrix/download'
+);
