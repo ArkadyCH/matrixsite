@@ -10,13 +10,13 @@
                 <a class="nav-link" href="">Главная</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Скачать</a>
+                <a class="nav-link" href="/download">Скачать</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Форум</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Авторизация</a>
+                <a class="nav-link" href="/login">Авторизация</a>
             </li>
         </ul>
     </div>
