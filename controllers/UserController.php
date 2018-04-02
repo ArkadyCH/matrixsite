@@ -8,15 +8,25 @@
 
 class UserController
 {
+    public function actionLogout(){
+        User::destroyUserSession();
+        header("Location: /download");
+    }
     public function actionLogin(){
         $params = array();
         if(isset($_POST['submit'])){
             foreach($_POST as $key=>$value){
                 $params[$key] = $value;
             }
-            User::checkUser($params);
+            $errors = false;
+            $user = User::checkUser($params);
+            if($user == false){
+                $errors = "Неправильно введены данные, повторите ещё раз";
+            }else{
+                User::createUserSession($user);
+                header("Location: /download");
+            }
         }
-
         require_once(ROOT . '/views/auth/login.php');
         return true;
     }
@@ -44,6 +54,8 @@ class UserController
             }
             if(!$errors){
                 User::createUser($params);
+                $user = User::checkUser($params);
+                User::createUserSession($user);
                 $result = true;
             }
         }

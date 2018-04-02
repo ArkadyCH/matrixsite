@@ -6,4 +6,5 @@ return array(
     'download' => 'matrix/download',
     'login' => 'user/login',
     'sign' => 'user/sign',
+    'logout' => 'user/logout',
 );

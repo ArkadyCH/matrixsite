@@ -10,7 +10,7 @@ class User
 {
     public static function checkUser($params){
         $connect = DataBase::getConnection();
-        $sql = "SELECT password FROM users WHERE email = :email";
+        $sql = "SELECT password,id FROM users WHERE email = :email";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':email', $params['email'], PDO::PARAM_STR);
@@ -19,8 +19,20 @@ class User
         $result = $db->fetch();
 
         if(password_verify($params['password'],$result['password']))
-            return true;
+            return $result['id'];
         return false;
+    }
+    public static function createUserSession($user_id){
+        $_SESSION['user_id'] = $user_id;
+    }
+    public static function checkUserSession(){
+        if(isset($_SESSION['user_id']))
+            return $_SESSION['user_id'];
+        return false;
+    }
+    public static function destroyUserSession(){
+        if(isset($_SESSION['user_id']))
+            unset($_SESSION['user_id']);
     }
     public static function createUser($params)
     {

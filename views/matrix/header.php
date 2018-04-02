@@ -4,20 +4,24 @@
     </div>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Главная</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/download">Скачать</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Форум</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Вход</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/download">Скачать</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Форум</a>
+                </li>
+            <?php if(!User::checkUserSession()): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Вход</a>
+                </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Выход</a>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>
