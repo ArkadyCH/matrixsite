@@ -14,7 +14,6 @@ class Router
     {
         $routesPath = ROOT.'/config/routes.php';
         $this->routes = include($routesPath);
-
     }
 
     // Возвращает URI из адресной строки

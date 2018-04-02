@@ -16,7 +16,7 @@
                 <a class="nav-link" href="">Форум</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/login">Авторизация</a>
+                <a class="nav-link" href="/login">Вход</a>
             </li>
         </ul>
     </div>
