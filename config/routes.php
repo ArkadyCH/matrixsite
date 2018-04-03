@@ -7,4 +7,5 @@ return array(
     'login' => 'user/login',
     'sign' => 'user/sign',
     'logout' => 'user/logout',
+    'forum' => 'forum/view',
 );

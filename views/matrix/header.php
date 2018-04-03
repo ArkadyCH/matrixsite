@@ -5,13 +5,10 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Главная</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/download">Скачать</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Форум</a>
+                    <a class="nav-link" href="/forum">Форум</a>
                 </li>
             <?php if(!User::checkUserSession()): ?>
                 <li class="nav-item">
