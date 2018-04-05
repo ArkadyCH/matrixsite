@@ -8,5 +8,7 @@
 
 class Matrix
 {
-
+    public static function GoBack() {
+        return $_SERVER['HTTP_REFERER'];
+    }
 }
