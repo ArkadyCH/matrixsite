@@ -2,9 +2,6 @@
     border-bottom: 1px solid #e7e7e7;
 }
 .content{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     width: 500px;
     height: 500px;
 }
@@ -12,5 +9,31 @@
     display: block;
 }
 .center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-align{
     text-align: center;
+}
+.forum-box{
+    padding: 30px;
+    width: 1170px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+.table-top{
+    background: aquamarine;
+}
+.forumNameTd{
+    width: 600px;
+}
+.table-f{
+    background: antiquewhite;
+}
+.table{
+    display: table;
+}
+.shadow{
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
