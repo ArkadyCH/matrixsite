@@ -22,8 +22,8 @@
         <?php endif; ?>
     </div>
 
-    <div class="content">
-        <h1 class="center">Регистрация</h1>
+    <div class="content center">
+        <h1 class="text-align">Регистрация</h1>
         <form method="post">
             <div class="form-group">
                 <label for="name">User Name</label>

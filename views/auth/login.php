@@ -7,8 +7,8 @@
 <body>
 <?php include ROOT.'/views/matrix/header.php';?>
 
-<div class="content">
-    <h1 class="center">Вход</h1>
+<div class="content center">
+    <h1 class="text-align">Вход</h1>
     <form method="post">
         <div class="form-group">
             <label for="email">Email address</label>
