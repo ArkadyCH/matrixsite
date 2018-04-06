@@ -14,23 +14,25 @@
         <table class="table shadow" style="height: 100px;">
             <tbody>
                 <tr class="table-info">
-                    <td colspan="4"><?php echo $value['title_name']; ?></td>
+                    <td colspan="4">
+                        <a class="text-dark" href="/forum/<?php echo $value['id'];?>"><?php echo $value['title_name']; ?></a>
+                    </td>
                 </tr>
                 <?php $listCategories = Forum::getCategoriesBySectionId($value['id']) ?>
                 <?php if(isset($listCategories) && is_array($listCategories)): ?>
+                <tr class="table-active">
+                    <td class="forumNameTd"></td>
+                    <td>Темы</td>
+                    <td>Сообщения</td>
+                    <td>Описание</td>
+                </tr>
                     <?php foreach ($listCategories as $key => $value): ?>
-                    <tr class="table-active">
-                        <td class="forumNameTd"></td>
-                        <td>Темы</td>
-                        <td>Сообщения</td>
-                        <td>Описание</td>
-                    </tr>
                     <tr>
                         <td class="align-middle">
                             <a href="/forum/<?php echo $value['id'];?>"><?php echo $value['title_name']?></a>
                         </td>
                         <td class="align-middle text-align">
-                            0
+                            <?php echo Forum::getCountTopicById($value['id']);?>
                         </td>
                         <td class="align-middle text-align">
                             0
@@ -49,7 +51,8 @@
         </table>
     </div>
 <?php endforeach; ?>
-    <a class="btn btn-link" href="/forum/create">Создать категорию</a>
+    <a class="btn btn-link" href="forum/create/category">Создать категорию</a>
+    <a class="btn btn-link" href="forum/delete">Удалить категорию/тему</a>
 </div>
 
 </body>
