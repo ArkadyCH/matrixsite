@@ -11,7 +11,7 @@
     <form method="post">
         <div class="form-group">
             <label for="selectCategory">Выберите Родителя</label>
-            <select class="form-control" name="id" id="selectCategory" required>
+            <select class="form-control" name="parent_id" id="selectCategory" required>
                 <option value="0">Новый раздел</option>
                 <?php foreach($list as $key => $value): ?>
                     <?php foreach($value as $inner_key => $inner_value): ?>

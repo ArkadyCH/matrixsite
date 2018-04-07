@@ -41,11 +41,9 @@ class ForumController
             if($params['parent_id'] == 0){
                 $type_id = 1;
                 $lvl = 0;
-
             }else{
                 $type_id = 2;
                 $lvl = Forum::getRootLvl($params['parent_id'])+1;
-
             }
             if(Forum::saveCategory($params['title_name'],$params['description'],$params['parent_id'] , $user_id , $type_id ,$lvl)){
                 header('Location: forum');
