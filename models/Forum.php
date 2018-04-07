@@ -8,10 +8,10 @@
 
 class Forum
 {
-    public static function saveCategory($title_name , $description , $parent_id , $user_id , $type_id){
+    public static function saveCategory($title_name , $description , $parent_id , $user_id , $type_id , $lvl){
         $connect = DataBase::getConnection();
-        $sql = "INSERT INTO forum (title_name , description , user_id , parent_id , type_id)".
-        " VALUES (:title_name,:description,:user_id,:parent_id,:type_id)";
+        $sql = "INSERT INTO forum (title_name , description , user_id , parent_id , type_id , lvl)".
+        " VALUES (:title_name,:description,:user_id,:parent_id,:type_id,:lvl)";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':title_name',$title_name, PDO::PARAM_STR);
@@ -19,13 +19,14 @@ class Forum
         $db->bindParam(':user_id',$user_id, PDO::PARAM_STR);
         $db->bindParam(':parent_id',$parent_id, PDO::PARAM_STR);
         $db->bindParam(':type_id',$type_id, PDO::PARAM_STR);
+        $db->bindParam(':lvl',$lvl, PDO::PARAM_STR);
 
         return $db->execute();
     }
-    public static function saveTopic($title_name , $description , $parent_id , $user_id , $type_id){
+    public static function saveTopic($title_name , $description , $parent_id , $user_id , $type_id , $lvl){
         $connect = DataBase::getConnection();
-        $sql = "INSERT INTO forum (title_name , description , user_id , parent_id , type_id)".
-            " VALUES (:title_name,:description,:user_id,:parent_id,:type_id)";
+        $sql = "INSERT INTO forum (title_name , description , user_id , parent_id , type_id , lvl)".
+            " VALUES (:title_name,:description,:user_id,:parent_id,:type_id,:lvl)";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':title_name',$title_name, PDO::PARAM_STR);
@@ -33,6 +34,7 @@ class Forum
         $db->bindParam(':user_id',$user_id, PDO::PARAM_STR);
         $db->bindParam(':parent_id',$parent_id, PDO::PARAM_STR);
         $db->bindParam(':type_id',$type_id, PDO::PARAM_STR);
+        $db->bindParam(':lvl',$lvl, PDO::PARAM_STR);
 
         return $db->execute();
     }
@@ -54,6 +56,25 @@ class Forum
         while($row = $db->fetch()){
             $list[$i]['id'] = $row['id'];
             $list[$i]['title_name'] = $row['title_name'];
+            $i++;
+        }
+
+        return $list;
+    }
+    public static function getElementById($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM forum WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        $list = array();
+        $i=0;
+        while($row = $db->fetch()){
+            $list[$i]['id'] = $row['id'];
+            $list[$i]['title_name'] = $row['title_name'];
+            $list[$i]['type_id'] = $row['type_id'];
             $i++;
         }
 
@@ -83,6 +104,7 @@ class Forum
         while($row = $db->fetch()){
             $list[$i]['id'] = $row['id'];
             $list[$i]['title_name'] = $row['title_name'];
+            $list[$i]['parent_id'] = $row['parent_id'];
             $i++;
         }
 
@@ -139,7 +161,7 @@ class Forum
     public static function getChildById($id){
         $db = Forum::getForum();
 
-        $list = array();
+        $list[] = $id;
         $keys = array();
         $keys[] = $id;
 
@@ -149,8 +171,16 @@ class Forum
                 $keys[] = $row['id'];
             }
         }
-        $list[] = $id;
         return $list;
+    }
+    public static function getRoots(){
+        $connect = DataBase::getConnection();
+
+        $sql = "SELECT id FROM forum WHERE parent_id = 0";
+
+        $db = $connect->query($sql);
+
+        return $db->fetchAll();
     }
     public static function getCountTopic($id){
         $db = Forum::getForum();
@@ -178,5 +208,29 @@ class Forum
         if($result = $db->execute())
             return $result;
         return false;
+    }
+    public static function getRootLvl($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT lvl FROM forum WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetch())
+            return $result['lvl'];
+        return false;
+    }
+    public static function getTree(){
+        $roots = Forum::getRoots();
+        foreach($roots as $key => $value){
+            $tree[] = Forum::getChildById($value['id']);
+        }
+        foreach($tree as $key => $value){
+            foreach($value as $inner_key => $inner_value){
+                $list[] = Forum::getElementById($inner_value);
+            }
+        }
+        return $list;
     }
 }

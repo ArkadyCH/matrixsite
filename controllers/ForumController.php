@@ -29,6 +29,7 @@ class ForumController
     }
     public function actionCreateCategory(){
         $params = array();
+        $lvl = '';
         if(isset($_POST['submit'])){
             foreach($_POST as $key=>$value){
                 $params[$key] = $value;
@@ -39,21 +40,26 @@ class ForumController
             }
             if($params['parent_id'] == 0){
                 $type_id = 1;
+                $lvl = 0;
+
             }else{
                 $type_id = 2;
+                $lvl = Forum::getRootLvl($params['parent_id'])+1;
+
             }
-            if(Forum::saveCategory($params['title_name'],$params['description'],$params['parent_id'] , $user_id , $type_id)){
+            if(Forum::saveCategory($params['title_name'],$params['description'],$params['parent_id'] , $user_id , $type_id ,$lvl)){
                 header('Location: forum');
             }else{
                 echo 'misha vse xuina';
             }
         }
-        $list = Forum::getListSection();
+        $list = Forum::getTree();
         require_once(ROOT . '/views/forum/create.php');
         return true;
     }
     public function actionCreateTopic($id){
         $params = array();
+        $lvl = '';
         if(isset($_POST['submit'])){
             foreach($_POST as $key=>$value){
                 $params[$key] = $value;
@@ -64,7 +70,8 @@ class ForumController
             }
             $type_id = 3;
             $parent_id = $id;
-            if(Forum::saveTopic($params['title_name'],$params['description'],$parent_id , $user_id , $type_id)){
+            $lvl = $lvl = Forum::getRootLvl($parent_id)+1;
+            if(Forum::saveTopic($params['title_name'],$params['description'],$parent_id , $user_id , $type_id,$lvl)){
                 header('Location: /forum');
             }else{
                 echo 'misha vse xuina';
@@ -76,7 +83,7 @@ class ForumController
     }
     public function actionDelete(){
         $id = '';
-        $list = Forum::getListAll();
+        $list = Forum::getTree();
         if(isset($_POST['submit'])) {
             $id = $_POST['id'];
             $result = Forum::getChildById($id);
@@ -89,7 +96,7 @@ class ForumController
     }
 
     public function actionEdit(){
-        $list = Forum::getListAll();
+        $list = Forum::getTree();
         require_once(ROOT . '/views/forum/edit.php');
         return true;
     }

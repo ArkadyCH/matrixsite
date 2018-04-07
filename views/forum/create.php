@@ -11,11 +11,20 @@
     <form method="post">
         <div class="form-group">
             <label for="selectCategory">Выберите Родителя</label>
-            <select class="form-control" name="parent_id" id="selectCategory" required>
+            <select class="form-control" name="id" id="selectCategory" required>
                 <option value="0">Новый раздел</option>
                 <?php foreach($list as $key => $value): ?>
-                    <option value="<?php echo $value['id'];?>"><?php echo $value['title_name'];?></option>
-                <? endforeach;?>
+                    <?php foreach($value as $inner_key => $inner_value): ?>
+                        <?php if($inner_value['type_id'] != 3):?>
+                            <option value="<?php echo $inner_value['id'];?>">
+                                <?php for($i = 0; $i < Forum::getRootLvl($inner_value['id']);$i++): ?>
+                                    <?php echo "&#160;";?>
+                                <?php endfor;?>
+                                <?php echo $inner_value['title_name'];?>
+                            </option>
+                        <?php endif;?>
+                    <?php endforeach;?>
+                <?php endforeach;?>
             </select>
         </div>
         <div class="form-group">
