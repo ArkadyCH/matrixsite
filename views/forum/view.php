@@ -53,6 +53,7 @@
 <?php endforeach; ?>
     <a class="btn btn-link" href="forum/create/category">Создать категорию</a>
     <a class="btn btn-link" href="forum/delete">Удалить категорию/тему</a>
+    <a class="btn btn-link" href="forum/edit">Изменить категорию/тему</a>
 </div>
 
 </body>

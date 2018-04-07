@@ -65,7 +65,7 @@ class ForumController
             $type_id = 3;
             $parent_id = $id;
             if(Forum::saveTopic($params['title_name'],$params['description'],$parent_id , $user_id , $type_id)){
-                header('Location: forum');
+                header('Location: /forum');
             }else{
                 echo 'misha vse xuina';
             }
@@ -88,4 +88,9 @@ class ForumController
         return true;
     }
 
+    public function actionEdit(){
+        $list = Forum::getListAll();
+        require_once(ROOT . '/views/forum/edit.php');
+        return true;
+    }
 }
