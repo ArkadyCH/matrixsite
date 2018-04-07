@@ -32,7 +32,7 @@
                             <a href="/forum/<?php echo $value['id'];?>"><?php echo $value['title_name']?></a>
                         </td>
                         <td class="align-middle text-align">
-                            <?php echo Forum::getCountTopicById($value['id']);?>
+                            <?php echo Forum::getCountTopic($value['id']);?>
                         </td>
                         <td class="align-middle text-align">
                             0

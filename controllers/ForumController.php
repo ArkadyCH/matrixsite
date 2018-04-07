@@ -76,20 +76,12 @@ class ForumController
     }
     public function actionDelete(){
         $id = '';
+        $list = Forum::getListAll();
         if(isset($_POST['submit'])) {
             $id = $_POST['id'];
-        }
-        $list = Forum::getListAll();
-        $result = Forum::getChildById($id);
-
-        Forum::deleteCategoryById($id);
-        if(is_array($result)){
-            foreach($result as $key => $value)
-            {
-                foreach($value  as  $inner_key => $inner_value)
-                {
-                    Forum::deleteCategoryById($inner_value);
-                }
+            $result = Forum::getChildById($id);
+            foreach($result as $key => $value){
+                Forum::deleteCategoryById($value);
             }
         }
         require_once(ROOT . '/views/forum/delete.php');

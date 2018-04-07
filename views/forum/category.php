@@ -16,9 +16,7 @@
                 <tr class="table-info">
                     <td colspan="4">
                         <?php echo $value['title_name']; ?>
-                        <?php if(!$listCategories && $value['parent_id'] != 0): ?>
                             <a class="float-right" href="/forum/create/topic/<?php echo $value['id'];?>">Создать тему</a>
-                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php if(isset($listCategories) && $listCategories[$key]['type_id'] == 2): ?>
@@ -34,7 +32,7 @@
                                 <a href="/forum/<?php echo $category['id'];?>"><?php echo $category['title_name']?></a>
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getCountTopicById($category['id']);?>
+                                <?php echo Forum::getCountTopic($category['id']);?>
                             </td>
                             <td class="align-middle text-align">
                                 0
