@@ -95,31 +95,27 @@ class ForumController
 
     public function actionEdit(){
         $list = Forum::getTree();
+
         $title_name = '';
         $description = '';
         $parent_id = '';
         $lvl = '';
-        $id = '';
-        if(isset($_POST['submit_choose'])) {
+        $id = $_POST['id'];
+        if(isset($_POST['submit'])){
             $id = $_POST['id'];
             $elements = Forum::getElementById($id);
         }
+
         if(isset($_POST['submit_edit'])){
             $title_name = $_POST['title_name'];
             $description = $_POST['description'];
             $parent_id = $_POST['parent_id'];
 
-            echo $parent_id.'<br>';
-            echo $id.'<br>';
-            echo $title_name.'<br>';
-            echo $description.'<br>';
-
             if(Forum::updateElemebt($id , $title_name,$description,$parent_id)){
-                echo 'OK';
+                echo "OK";
             }else{
-                echo 'misha vse xuina';
+                echo "misha vse xuina";
             }
-
         }
         require_once(ROOT . '/views/forum/edit.php');
         return true;

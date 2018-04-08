@@ -24,13 +24,15 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="submit" name="submit_choose" class="btn btn-primary">Выбрать</button>
+            <button type="submit" name="submit" class="btn btn-primary">Выбрать</button>
         </form>
     </div>
-
-    <div class="form-edit">
-        <?php if (isset($elements)): ?>
-            <form method="post">
+</div>
+<?php if($id): ?>
+<div class="forum-box center">
+    <div class="form-choose">
+        <form method="post">
+            <?php if (isset($elements)): ?>
                 <div class="form-group">
                     <label for="selectCategory">Выберите Родителя</label>
                     <select class="form-control" name="parent_id" id="selectCategory" required>
@@ -38,7 +40,7 @@
                             <?php foreach ($value as $inner_key => $inner_value): ?>
                                 <?php if ($elements[0]['type_id'] == 1): ?>
                                     <?php if ($inner_value['id'] == $elements[0]['id']): ?>
-                                        <option value="<?php echo $inner_value['id']; ?>">
+                                        <option value="0">
                                             <?php echo $inner_value['title_name']; ?>
                                         </option>
                                     <?php endif; ?>
@@ -54,7 +56,6 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
-
                     </select>
                 </div>
                 <div class="form-group">
@@ -67,11 +68,11 @@
                     <textarea class="form-control" name="description" id="description"
                               rows="3"><?php echo $elements[0]['description'] ?></textarea>
                 </div>
-                <button type="submit" name="submit_edit" class="btn btn-primary">Изменить</button>
-            </form>
-        <?php endif; ?>
+            <?php endif; ?>
+            <button type="submit" name="submit_edit" class="btn btn-primary">Изменить</button>
+        </form>
     </div>
 </div>
-
+<?php endif; ?>
 </body>
 </html>
