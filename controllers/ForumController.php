@@ -100,22 +100,22 @@ class ForumController
         $description = '';
         $parent_id = '';
         $lvl = '';
-        $id = $_POST['id'];
+        $id = '';
+        $result = false;
         if(isset($_POST['submit'])){
             $id = $_POST['id'];
             $elements = Forum::getElementById($id);
+            $result = true;
         }
 
         if(isset($_POST['submit_edit'])){
             $title_name = $_POST['title_name'];
             $description = $_POST['description'];
             $parent_id = $_POST['parent_id'];
+            $id = $_POST['id'];
 
-            if(Forum::updateElemebt($id , $title_name,$description,$parent_id)){
-                echo "OK";
-            }else{
-                echo "misha vse xuina";
-            }
+            if(Forum::updateElemebt($id , $title_name,$description,$parent_id))
+                $result = false;
         }
         require_once(ROOT . '/views/forum/edit.php');
         return true;

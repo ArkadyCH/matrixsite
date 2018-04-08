@@ -28,13 +28,19 @@
         </form>
     </div>
 </div>
-<?php if($id): ?>
+<?php if($result): ?>
 <div class="forum-box center">
     <div class="form-choose">
         <form method="post">
             <?php if (isset($elements)): ?>
                 <div class="form-group">
-                    <label for="selectCategory">Выберите Родителя</label>
+                    <label for="idElement">Выбранный элемент</label>
+                    <select class="form-control" name="id" id="idElement" required>
+                        <option value="<?php echo $elements[0]['id'];?>"><?php echo $elements[0]['title_name'];?></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectCategory">Выберите родителя если хотите переместить элемент</label>
                     <select class="form-control" name="parent_id" id="selectCategory" required>
                         <?php foreach ($list as $key => $value): ?>
                             <?php foreach ($value as $inner_key => $inner_value): ?>
