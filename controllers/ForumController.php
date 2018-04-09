@@ -113,8 +113,14 @@ class ForumController
             $description = $_POST['description'];
             $parent_id = $_POST['parent_id'];
             $id = $_POST['id'];
+            $elements = Forum::getElementById($id);
 
-            if(Forum::updateElemebt($id , $title_name,$description,$parent_id))
+            if($parent_id != $elements[0]['parent_id'])
+                $lvl = Forum::getRootLvl($parent_id)+1;
+            else
+                $lvl = $elements[0]['lvl'];
+
+            if(Forum::updateElemebt($id , $title_name,$description,$parent_id , $lvl))
                 $result = false;
         }
         require_once(ROOT . '/views/forum/edit.php');

@@ -77,6 +77,7 @@ class Forum
             $list[$i]['description'] = $row['description'];
             $list[$i]['type_id'] = $row['type_id'];
             $list[$i]['parent_id'] = $row['parent_id'];
+            $list[$i]['lvl'] = $row['lvl'];
             $i++;
         }
 
@@ -235,15 +236,16 @@ class Forum
         }
         return $list;
     }
-    public static function updateElemebt($id , $title_name , $description , $parent_id){
+    public static function updateElemebt($id , $title_name , $description , $parent_id , $lvl){
         $connect = DataBase::getConnection();
-        $sql = "UPDATE forum SET title_name = :title_name, description = :description , parent_id = :parent_id WHERE id = :id";
+        $sql = "UPDATE forum SET title_name = :title_name, description = :description , parent_id = :parent_id , lvl = :lvl WHERE id = :id";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':id' , $id , PDO::PARAM_STR);
         $db->bindParam(':title_name' , $title_name , PDO::PARAM_STR);
         $db->bindParam(':description' , $description , PDO::PARAM_STR);
         $db->bindParam(':parent_id' , $parent_id , PDO::PARAM_STR);
+        $db->bindParam(':lvl' , $lvl , PDO::PARAM_STR);
         $db->execute();
 
         if($result = $db->fetch())
