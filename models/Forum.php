@@ -139,7 +139,7 @@ class Forum
     }
     public static function getTopicById($id){
         $connect = DataBase::getConnection();
-        $sql = "SELECT * FROM forum WHERE parent_id = :id AND type_id = 3";
+        $sql = "SELECT * FROM forum WHERE id = :id AND type_id = 3";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':id' , $id , PDO::PARAM_STR);
@@ -160,6 +160,23 @@ class Forum
         if($result = $db->fetch())
             return $result['name'];
         return false;
+    }
+    public static function getUserById($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        $result = array();
+
+        while($row = $db->fetch()){
+            $result['id'] = $row['id'];
+            $result['name'] = $row['name'];
+            $result['email'] = $row['email'];
+        }
+        return $result;
     }
     public static function getChildById($id){
         $db = Forum::getForum();
@@ -251,5 +268,50 @@ class Forum
         if($result = $db->fetch())
             return true;
         return false;
+    }
+    public static function getCountTopicByUserId($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM forum WHERE user_id = :id AND type_id = 3";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        return count($db->fetchAll());
+    }
+    public static function setMessage($message , $user_id , $parent_id , $topic_id){
+        $connect = DataBase::getConnection();
+        $sql = "INSERT INTO messages (message , user_id , parent_id , topic_id)".
+            " VALUES (:message,:user_id,:parent_id,:topic_id)";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':message' , $message , PDO::PARAM_STR);
+        $db->bindParam(':user_id' , $user_id , PDO::PARAM_STR);
+        $db->bindParam(':parent_id' , $parent_id , PDO::PARAM_STR);
+        $db->bindParam(':topic_id' , $topic_id , PDO::PARAM_STR);
+
+        return $db->execute();
+    }
+    public static function getTopicMessages($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM messages WHERE topic_id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetchAll())
+            return $result;
+        return false;
+    }
+    public static function getCountUserMessages($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM messages WHERE user_id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        return count($db->fetchAll());
     }
 }

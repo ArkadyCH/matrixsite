@@ -21,6 +21,10 @@
     width: 1170px;
     margin-top: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    background: white;
+}
+#mainNav{
+    background: white;
 }
 .table-top{
     background: aquamarine;
@@ -36,4 +40,33 @@
 }
 .shadow{
     box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+.user_topic{
+    width: 160px;
+    float: left;
+}
+.user_img img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+}
+.information p{
+    text-align: center;
+}
+.topic_description{
+    height: 300px;
+}
+body{
+    background-color: #e6ecf0;
+}
+.message{
+    height: 100px;
+}
+.user_img_message img{
+    width: 52px;
+    height: 52px;
+    border-radius: 100px;
+}
+.user_img_message{
+    margin-top: 20%;
 }

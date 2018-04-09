@@ -23,7 +23,20 @@ class ForumController
         return true;
     }
     public function actionViewTopic($id){
-        $listTopic = Forum::getTopicById($id);
+        $topic= Forum::getTopicById($id);
+        $user = Forum::getUserById($topic[0]['user_id']);
+        $countTopics = Forum::getCountTopicByUserId($user['id']);
+        $messages = Forum::getTopicMessages($topic[0]['id']);
+
+        if(isset($_POST['submit'])){
+            $message = $_POST['message'];
+
+            $parent_id = 0;
+            $topic_id = $topic[0]['id'];
+
+            Forum::setMessage($message , $_SESSION['user_id'] , $parent_id , $topic_id);
+        }
+
         require_once(ROOT . '/views/forum/topic.php');
         return true;
     }
