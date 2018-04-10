@@ -25,7 +25,7 @@ class ForumController
     public function actionViewTopic($id){
         $topic= Forum::getTopicById($id);
         $user = Forum::getUserById($topic[0]['user_id']);
-        $countTopics = Forum::getCountTopicByUserId($user['id']);
+
         $messages = Forum::getTopicMessages($topic[0]['id']);
 
         if(isset($_POST['submit'])){
@@ -34,7 +34,9 @@ class ForumController
             $parent_id = 0;
             $topic_id = $topic[0]['id'];
 
-            Forum::setMessage($message , $_SESSION['user_id'] , $parent_id , $topic_id);
+            if(Forum::setMessage($message , $_SESSION['user_id'] , $parent_id , $topic_id)){
+                header("Location: /topic/$id");
+            }
         }
 
         require_once(ROOT . '/views/forum/topic.php');
@@ -59,7 +61,7 @@ class ForumController
                 $lvl = Forum::getRootLvl($params['parent_id'])+1;
             }
             if(Forum::saveCategory($params['title_name'],$params['description'],$params['parent_id'] , $user_id , $type_id ,$lvl)){
-                header('Location: forum');
+                header('Location: /forum');
             }else{
                 echo 'misha vse xuina';
             }
@@ -138,5 +140,8 @@ class ForumController
         }
         require_once(ROOT . '/views/forum/edit.php');
         return true;
+    }
+    public function actionCabinet(){
+
     }
 }

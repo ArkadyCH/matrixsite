@@ -314,4 +314,16 @@ class Forum
 
         return count($db->fetchAll());
     }
+    public static function getUserPermission($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT permission FROM users WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetch())
+            return $result['permission'];
+        return false;
+    }
 }

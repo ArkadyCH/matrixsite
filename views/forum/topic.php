@@ -17,8 +17,8 @@
             </div>
             <div class="information">
                 <p><?php echo $user['name'];?></p>
-                <p>Тем: <?php echo $countTopics;?></p>
-                <p>Сообщений:</p>
+                <p>Тем: <?php echo Forum::getCountTopicByUserId($value['user_id']);?></p>
+                <p>Сообщений: <?php echo Forum::getCountUserMessages($value['user_id']);?></p>
             </div>
         </div>
         <div class="topic_description">
@@ -27,25 +27,26 @@
     <?php endforeach; ?>
 </div>
 
-<?php foreach($messages as $key => $value): ?>
-<div class="forum-box center">
-    <div class="user float-left">
-        <?php $user_message = Forum::getUserById($value['user_id']);?>
-        <?php $countMessage = Forum::getCountUserMessages($user_message['id']);?>
-        <div class="user_img_message float-left">
-            <img src="/templates/images/avatars/1.jpg">
+<?php if($messages):?>
+    <?php foreach($messages as $key => $value): ?>
+    <div class="forum-box center">
+        <div class="user float-left">
+            <?php $user_message = Forum::getUserById($value['user_id']);?>
+            <div class="user_img_message float-left">
+                <img src="/templates/images/avatars/1.jpg">
+            </div>
+            <div class="information float-left">
+                <p><?php echo $user_message['name'];?></p>
+                <p>Тем: <?php echo Forum::getCountTopicByUserId($value['user_id']);?></p>
+                <p>Сообщений: <?php echo Forum::getCountUserMessages($user_message['id']);?></p>
+            </div>
         </div>
-        <div class="information float-left">
-            <p><?php echo $user_message['name'];?></p>
-            <p>Тем: <?php echo $countTopics;?></p>
-            <p>Сообщений: <?php echo $countMessage;?></p>
+        <div class="message">
+            <?php echo $value['message']?>
         </div>
     </div>
-    <div class="message">
-        <?php echo $value['message']?>
-    </div>
-</div>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
 
 <div class="forum-box center">
     <form method="post">
