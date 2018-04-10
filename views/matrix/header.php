@@ -12,11 +12,15 @@
                 </li>
             <?php if(!User::checkUserSession()): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Вход</a>
+                    <a class="nav-link" href="/login">Вход <i class="fa fa-sign-in"></i></a>
                 </li>
             <?php else: ?>
+            <?php $user = User::getUserById($_SESSION['user_id']);?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Выход</a>
+                    <a class="nav-link" href="/cabinet"><?php echo $user['name'];?> <i class="fa fa-user"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Выход <i class="fa fa-sign-out"></i></a>
                 </li>
             <?php endif; ?>
         </ul>

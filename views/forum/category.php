@@ -57,7 +57,7 @@
                                 0
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getUserNameById($value['user_id']);?>
+                                <?php echo User::getUserNameById($value['user_id']);?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

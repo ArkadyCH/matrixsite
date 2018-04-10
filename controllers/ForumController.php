@@ -24,7 +24,7 @@ class ForumController
     }
     public function actionViewTopic($id){
         $topic= Forum::getTopicById($id);
-        $user = Forum::getUserById($topic[0]['user_id']);
+        $user = User::getUserById($topic[0]['user_id']);
 
         $messages = Forum::getTopicMessages($topic[0]['id']);
 
@@ -140,8 +140,5 @@ class ForumController
         }
         require_once(ROOT . '/views/forum/edit.php');
         return true;
-    }
-    public function actionCabinet(){
-
     }
 }

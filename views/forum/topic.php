@@ -31,7 +31,7 @@
     <?php foreach($messages as $key => $value): ?>
     <div class="forum-box center">
         <div class="user float-left">
-            <?php $user_message = Forum::getUserById($value['user_id']);?>
+            <?php $user_message = User::getUserById($value['user_id']);?>
             <div class="user_img_message float-left">
                 <img src="/templates/images/avatars/1.jpg">
             </div>

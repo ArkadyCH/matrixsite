@@ -12,4 +12,10 @@ class MatrixController
         require_once(ROOT . '/views/download/download.php');
         return true;
     }
+    public function actionCabinet(){
+        $user = User::getUserById($_SESSION['user_id']);
+        $permission = User::getUserPermission($user['id']);
+        require_once(ROOT . '/views/matrix/cabinet.php');
+        return true;
+    }
 }

@@ -79,4 +79,45 @@ class User
             return true;
         return false;
     }
+    public static function getUserNameById($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetch())
+            return $result['name'];
+        return false;
+    }
+    public static function getUserById($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        $result = array();
+
+        while($row = $db->fetch()){
+            $result['id'] = $row['id'];
+            $result['name'] = $row['name'];
+            $result['email'] = $row['email'];
+        }
+        return $result;
+    }
+    public static function getUserPermission($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT permission FROM users WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetch())
+            return $result['permission'];
+        return false;
+    }
 }
