@@ -13,7 +13,7 @@
         <h1 class="text-align"><?php echo $value['title_name'];?></h1>
         <div class="user_topic">
             <div class="user_img">
-                <img src="/templates/images/avatars/1.jpg">
+                <img class="center" src="<?php echo User::getImage($value['user_id']);?>">
             </div>
             <div class="information">
                 <p><?php echo $user['name'];?></p>
@@ -33,7 +33,7 @@
         <div class="user float-left">
             <?php $user_message = User::getUserById($value['user_id']);?>
             <div class="user_img_message float-left">
-                <img src="/templates/images/avatars/1.jpg">
+                <img class="center" src="<?php echo User::getImage($value['user_id']);?>">
             </div>
             <div class="information float-left">
                 <p><?php echo $user_message['name'];?></p>

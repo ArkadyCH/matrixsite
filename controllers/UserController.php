@@ -53,14 +53,44 @@ class UserController
                 $errors[] = 'Пароли не совпадают';
             }
             if(!$errors){
-                User::createUser($params);
+                $id = User::createUser($params);
                 $user = User::checkUser($params);
+
+                if($id){
+                    if(is_uploaded_file($_FILES['userfile']['tmp_name'])){
+                        move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/upload/images/user/$id.jpg");
+                    }
+                }
+
                 User::createUserSession($user);
                 $result = true;
             }
         }
 
         require_once(ROOT . '/views/auth/sign.php');
+        return true;
+    }
+    public function actionEdit($id){
+        $user = User::getUserById($id);
+        $name = '';
+        $email = '';
+        if(isset($_POST['submit'])){
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+
+            $errors = false;
+            if(!User::validateName($name)){
+                $errors[] = 'Логин не должен быть пустым и его длина должна быть не меньше 6 символов';
+            }
+            if(!$errors){
+                User::updateUser($id,$name,$email);
+                if(is_uploaded_file($_FILES['userfile']['tmp_name'])){
+                    move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/upload/images/user/$id.jpg");
+                }
+            }
+        }
+
+        require_once(ROOT . '/views/auth/edit.php');
         return true;
     }
 }

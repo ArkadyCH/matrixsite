@@ -8,6 +8,7 @@ return array(
     'login' => 'user/login',
     'sign' => 'user/sign',
     'logout' => 'user/logout',
+    'user/edit/([0-9]+)' => 'user/edit/$1',
 
     'forum/create/category' => 'forum/createCategory',
     'forum/delete' => 'forum/delete',

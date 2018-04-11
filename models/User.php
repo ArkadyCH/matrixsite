@@ -46,7 +46,19 @@ class User
         $db->bindParam(':email', $params['email'], PDO::PARAM_STR);
         $db->bindParam(':password', $params['password'], PDO::PARAM_STR);
 
-        return $db->execute();
+        if($db->execute())
+            return $connect->lastInsertId();
+        return 0;
+    }
+    public static function getImage($id){
+        $path = '/upload/images/user/';
+        $noImage = $path.'noimage.jpg';
+        $pathToUserImage = $path.$id.'.jpg';
+
+        if(file_exists($_SERVER['DOCUMENT_ROOT'].$pathToUserImage)){
+            return $pathToUserImage;
+        }
+        return $noImage;
     }
 
     public static function validateName($name)
@@ -118,6 +130,19 @@ class User
 
         if($result = $db->fetch())
             return $result['permission'];
+        return false;
+    }
+    public static function updateUser($id , $name , $email){
+        $connect = DataBase::getConnection();
+        $sql = "UPDATE users SET name = :name, email = :email WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->bindParam(':name' , $name , PDO::PARAM_STR);
+        $db->bindParam(':email' , $email , PDO::PARAM_STR);
+
+        if($db->execute())
+            return true;
         return false;
     }
 }
