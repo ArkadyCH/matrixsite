@@ -145,4 +145,30 @@ class User
             return true;
         return false;
     }
+    public static function updateUserPassword($id , $password){
+        $password= password_hash($password,PASSWORD_DEFAULT);
+        $connect = DataBase::getConnection();
+        $sql = "UPDATE users SET password = :password WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->bindParam(':password' , $password , PDO::PARAM_STR);
+
+        if($db->execute())
+            return true;
+        return false;
+    }
+    public static function checkPassword($id , $password){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT password FROM users WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        $result = $db->fetch();
+        if(password_verify($password , $result['password']))
+            return true;
+        return false;
+    }
 }
