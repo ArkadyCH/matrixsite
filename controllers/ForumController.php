@@ -43,6 +43,7 @@ class ForumController
         return true;
     }
     public function actionCreateCategory(){
+        Admin::isAdmin();
         $params = array();
         $lvl = '';
         if(isset($_POST['submit'])){
@@ -67,10 +68,11 @@ class ForumController
             }
         }
         $list = Forum::getTree();
-        require_once(ROOT . '/views/forum/create.php');
+        require_once(ROOT . '/views/admin/create_category.php');
         return true;
     }
     public function actionCreateTopic($id){
+        Admin::isAdmin();
         $params = array();
         $lvl = '';
         if(isset($_POST['submit'])){
@@ -91,10 +93,11 @@ class ForumController
             }
         }
         $title_name = Forum::getListSection();
-        require_once(ROOT . '/views/forum/createTopic.php');
+        require_once(ROOT . '/views/forum/create_topic.php');
         return true;
     }
     public function actionDelete(){
+        Admin::isAdmin();
         $id = '';
         $list = Forum::getTree();
         if(isset($_POST['submit'])) {
@@ -104,11 +107,12 @@ class ForumController
                 Forum::deleteCategoryById($value);
             }
         }
-        require_once(ROOT . '/views/forum/delete.php');
+        require_once(ROOT . '/views/admin/delete_category.php');
         return true;
     }
 
     public function actionEdit(){
+        Admin::isAdmin();
         $list = Forum::getTree();
 
         $title_name = '';
@@ -138,7 +142,7 @@ class ForumController
             if(Forum::updateElemebt($id , $title_name,$description,$parent_id , $lvl))
                 $result = false;
         }
-        require_once(ROOT . '/views/forum/edit.php');
+        require_once(ROOT . '/views/admin/edit_category.php');
         return true;
     }
 }

@@ -13,9 +13,16 @@ class MatrixController
         return true;
     }
     public function actionCabinet(){
+        if(!User::checkUserSession())
+            die('Вы не авторизированы');
         $user = User::getUserById($_SESSION['user_id']);
         $permission = User::getUserPermission($user['id']);
         require_once(ROOT . '/views/matrix/cabinet.php');
+        return true;
+    }
+    public static function actionAdmin(){
+        Admin::isAdmin();
+        require_once(ROOT . '/views/admin/panel.php');
         return true;
     }
 }
