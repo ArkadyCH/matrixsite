@@ -45,7 +45,7 @@
                 <?php elseif($listCategories[$key]['type_id'] == 3): ?>
                     <tr class="table-active">
                         <td class="forumNameTd"></td>
-                        <td>Ответов</td>
+                        <td class="align-middle text-align">Ответов</td>
                         <td>Автор</td>
                     </tr>
                     <?php foreach ($listCategories as $categories => $topic): ?>
@@ -56,7 +56,7 @@
                             <td class="align-middle text-align">
                                 0
                             </td>
-                            <td class="align-middle text-align">
+                            <td class="align-middle">
                                 <?php echo User::getUserNameById($value['user_id']);?>
                             </td>
                         </tr>

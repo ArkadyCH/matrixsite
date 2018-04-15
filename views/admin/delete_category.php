@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Download</title>
-    <?php include ROOT.'/views/matrix/link.php';?>
+    <?php include ROOT . '/views/matrix/link.php';?>
 </head>
 <body>
-<?php include ROOT.'/views/matrix/header.php';?>
+<?php include ROOT . '/views/matrix/header.php';?>
 
 <div class="forum-box center">
     <form method="post">
