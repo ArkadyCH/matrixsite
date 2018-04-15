@@ -285,4 +285,27 @@ class Forum
 
         return count($db->fetchAll());
     }
+    public static function deleteMessagesByTopic($id){
+        $connect = DataBase::getConnection();
+        $sql = "DELETE FROM messages WHERE topic_id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+
+        if($db->execute())
+            return true;
+        return false;
+    }
+    public static function getType($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT type_id FROM forum WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetch())
+            return $result['type_id'];
+        return false;
+    }
 }

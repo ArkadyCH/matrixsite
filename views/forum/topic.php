@@ -53,7 +53,7 @@
         <form method="post">
             <div class="form-group">
                 <label for="message">Сообщение:</label>
-                <textarea class="form-control" name="message" id="message" rows="3"></textarea>
+                <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Отправить</button>
         </form>

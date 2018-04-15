@@ -104,6 +104,8 @@ class ForumController
             $id = $_POST['id'];
             $result = Forum::getChildById($id);
             foreach($result as $key => $value){
+                if(Forum::getType($value) == 3)
+                    Forum::deleteMessagesByTopic($value);
                 Forum::deleteCategoryById($value);
             }
         }
