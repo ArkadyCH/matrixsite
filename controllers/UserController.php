@@ -78,6 +78,8 @@ class UserController
 
     public function actionEdit($id)
     {
+        if(!User::getUserById($_SESSION['user_id']))
+            die('У вас нету прав к этой странице');
         $user = User::getUserById($id);
         $name = '';
         $email = '';
