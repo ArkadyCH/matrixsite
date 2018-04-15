@@ -19,7 +19,7 @@
         <div class="text-align">
             <a href="/user/edit/<?php echo $user['id'];?>" class="btn btn-primary">Редактировать</a>
             <?php if ($permission == "admin"): ?>
-                <a href="" class="btn btn-primary">Админ панель</a>
+                <a href="admin" class="btn btn-primary">Админ панель</a>
             <?php endif; ?>
         </div>
     </div>
