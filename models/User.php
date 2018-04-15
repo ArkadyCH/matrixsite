@@ -171,4 +171,26 @@ class User
             return true;
         return false;
     }
+    public static function deleteUser($user_name){
+        $connect = DataBase::getConnection();
+        $sql = "DELETE FROM users WHERE name = :name";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":name" , $user_name , PDO::PARAM_STR);
+
+        if($result = $db->execute())
+            return true;
+        return false;
+    }
+    public static function getUserByName($user_name){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM users WHERE name = :name";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":name" , $user_name , PDO::PARAM_STR);
+        $db->execute();
+        if($result = $db->fetch())
+            return true;
+        return false;
+    }
 }

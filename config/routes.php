@@ -9,6 +9,7 @@ return array(
     'sign' => 'user/sign',
     'logout' => 'user/logout',
     'user/edit/([0-9]+)' => 'user/edit/$1',
+    'user/delete' => 'user/delete',
 
     'forum/create/category' => 'forum/createCategory',
     'forum/delete' => 'forum/delete',
@@ -21,4 +22,5 @@ return array(
     'forum' => 'forum/view',
 
     'cabinet' => 'matrix/cabinet',
+    'admin' => 'matrix/admin',
 );

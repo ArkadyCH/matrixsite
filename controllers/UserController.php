@@ -120,4 +120,18 @@ class UserController
         require_once(ROOT . '/views/auth/edit.php');
         return true;
     }
+    public function actionDelete(){
+        Admin::isAdmin();
+        if(isset($_POST['submit'])){
+            $name = $_POST['user_name'];
+            $errors = false;
+            if(User::getUserByName($name)){
+                User::deleteUser($name);
+                $errors[] = 'Пользователь удалён';
+            }else
+                $errors[] = 'Такого пользователя несуществует';
+        }
+        require_once(ROOT . '/views/admin/delete_user.php');
+        return true;
+    }
 }
