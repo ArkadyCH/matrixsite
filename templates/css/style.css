@@ -69,3 +69,7 @@ body{
 .user_img_message{
     margin-top: 20%;
 }
+.description{
+    width: 336px;
+    height: 72px;
+}
