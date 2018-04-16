@@ -9,7 +9,7 @@
 
 <div class="content center">
     <h1 class="text-align">Загрузить программу прямо сейчас</h1>
-    <a class="btn btn-primary col-centered" href=""><i class="fa fa-download"></i></a>
+    <a class="btn btn-primary col-centered" href="/download/soft/<?php echo Matrix::getCurrentFileName();?>"><i class="fa fa-download"></i></a>
 </div>
 
 </body>
