@@ -15,6 +15,7 @@
         <a class="btn btn-link" href="forum/edit">Изменить категорию/тему</a>
         <a class="btn btn-link" href="user/delete">Удалить пользователя</a>
         <a class="btn btn-link" href="upload/soft">Загрузить программу на сайт</a>
+        <a class="btn btn-link" href="infographic">Инфографика</a>
     </div>
 </div>
 

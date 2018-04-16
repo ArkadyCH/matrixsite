@@ -25,4 +25,5 @@ return array(
     'cabinet' => 'matrix/cabinet',
     'admin' => 'matrix/admin',
     'upload/soft' => 'matrix/uploadSoft',
+    'infographic' => 'matrix/infographic'
 );

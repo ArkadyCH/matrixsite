@@ -10,6 +10,7 @@ class MatrixController
 {
     public function actionDownload()
     {
+        $file = Matrix::getCurrentFile();
         require_once(ROOT . '/views/download/download.php');
         return true;
     }
@@ -44,7 +45,7 @@ class MatrixController
                     if ($value == substr($_FILES['soft']['name'], -3)) {
                         $id = Matrix::saveFile("$name.$value");
                         Matrix::setFileStatus($id);
-                        move_uploaded_file($_FILES["soft"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/softs/$name.$value");
+                        move_uploaded_file($_FILES["soft"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/softs/$id.$value");
                         $result = true;
                     }
                 }
@@ -57,31 +58,50 @@ class MatrixController
         require_once(ROOT . '/views/admin/upload.php');
         return true;
     }
-    public function actionDownloadSoft($name , $type){
-        $pathToFile = $_SERVER['DOCUMENT_ROOT']."/upload/softs/".$name.".".$type;
-        if (file_exists($pathToFile)) {
-            // сбрасываем буфер вывода PHP, чтобы избежать переполнения памяти выделенной под скрипт
-            // если этого не сделать файл будет читаться в память полностью!
-            if (ob_get_level()) {
-                ob_end_clean();
-            }
-            // заставляем браузер показать окно сохранения файла
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . basename($pathToFile));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($pathToFile));
-            // читаем файл и отправляем его пользователю
-            if ($fd = fopen($pathToFile, 'rb')) {
-                while (!feof($fd)) {
-                    print fread($fd, 1024);
+
+    public function actionDownloadSoft($name, $type)
+    {
+        if(User::checkUserSession()){
+            $pathToFile = $_SERVER['DOCUMENT_ROOT'] . "/upload/softs/" . $name . "." . $type;
+            if (file_exists($pathToFile)) {
+                // сбрасываем буфер вывода PHP, чтобы избежать переполнения памяти выделенной под скрипт
+                // если этого не сделать файл будет читаться в память полностью!
+                if (ob_get_level()) {
+                    ob_end_clean();
                 }
-                fclose($fd);
+                // заставляем браузер показать окно сохранения файла
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename=' . basename($pathToFile));
+                header('Content-Transfer-Encoding: binary');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($pathToFile));
+                // читаем файл и отправляем его пользователю
+                if (readfile($pathToFile)) {
+                    $user_id = $_SESSION['user_id'];
+                    $file = Matrix::getCurrentFile();
+                    $file_id = $file['id'];
+                    if ($count = Matrix::checFileStats($user_id, $file_id)) {
+                        $count ++;
+                        Matrix::updateFileStats($file_id, $user_id , $count);
+                    } else
+                        Matrix::setFileStats($user_id, 1 , $file_id);
+                }
+                exit;
             }
-            exit;
         }
+    }
+    public function actionInfographic(){
+        $files = Matrix::getFileStats(1);
+        foreach ($files as $key => $value) {
+            $users[] = User::getUserNameById($value['user_id'])." ".$value['data'];
+            $count[] = $value['count'];
+        }
+        $names = json_encode($users);
+        $counts = json_encode($count);
+        require_once(ROOT . '/views/matrix/infographic.php');
+        return true;
     }
 }
