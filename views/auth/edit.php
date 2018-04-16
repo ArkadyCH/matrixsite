@@ -23,7 +23,6 @@
         </div>
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <input type="hidden" name="MAX_FILE_SIZE" value="3145728" />
                 <div class="user_img">
                     <img class="center" src="<?php echo User::getImage($user['id']);?>">
                 </div>

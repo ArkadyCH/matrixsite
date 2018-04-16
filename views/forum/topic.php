@@ -16,7 +16,7 @@
                 <img class="center" src="<?php echo User::getImage($value['user_id']); ?>">
             </div>
             <div class="information">
-                <p><?php echo $user['name']; ?></p>
+                <p><?php echo User::getUserNameById($value['user_id']); ?></p>
                 <p>Тем: <?php echo Forum::getCountTopicByUserId($value['user_id']); ?></p>
                 <p>Сообщений: <?php echo Forum::getCountUserMessages($value['user_id']); ?></p>
             </div>

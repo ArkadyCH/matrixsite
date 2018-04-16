@@ -72,7 +72,6 @@ class ForumController
         return true;
     }
     public function actionCreateTopic($id){
-        Admin::isAdmin();
         $params = array();
         $lvl = '';
         if(isset($_POST['submit'])){

@@ -54,7 +54,6 @@ class MatrixController
                 }
             }
         }
-
         require_once(ROOT . '/views/admin/upload.php');
         return true;
     }

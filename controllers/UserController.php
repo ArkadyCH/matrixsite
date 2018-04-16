@@ -83,6 +83,8 @@ class UserController
         $user = User::getUserById($id);
         $name = '';
         $email = '';
+        $typefile = array('jpg', 'jpeg', 'png');
+        $result = false;
         if (isset($_POST['submit'])) {
             $name = $_POST['name'];
             $email = $_POST['email'];
@@ -113,9 +115,21 @@ class UserController
             if (!$errors) {
                 User::updateUser($id, $name, $email);
                 if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                    move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/user/$id.jpg");
+                    $filesize = $_FILES['userfile']['size'];
+                    if($filesize < 3145728){
+                        foreach ($typefile as $value) {
+                            if ($value == substr($_FILES['userfile']['name'], -3)) {
+                                move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/user/$id.$value");
+                                $result = true;
+                            }
+                        }
+                    }else
+                        $errors[] = 'Размер файла не должен привышать больше 3 МБ';
                 }
-                header('Location: /cabinet');
+                if (!$result) {
+                    $errors[] = 'Неправильный тип файла';
+                }
+
             }
         }
 
