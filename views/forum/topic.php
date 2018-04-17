@@ -9,8 +9,8 @@
 
 <div class="forum-box center">
     <?php foreach ($topic as $key => $value): ?>
-        <p>Тема: <?php echo $value['title_name']; ?> Дата: <?php echo $value['data']; ?></p>
-        <div class="user_topic">
+        <p class="text-align">Тема: <?php echo $value['title_name']; ?> Дата: <?php echo $value['data']; ?></p>
+        <div class="user_topic center">
             <div class="user_img">
                 <img class="center" src="<?php echo User::getImage($value['user_id']); ?>">
             </div>
