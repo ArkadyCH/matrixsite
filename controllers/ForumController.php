@@ -72,6 +72,8 @@ class ForumController
         return true;
     }
     public function actionCreateTopic($id){
+        if(!User::checkUserSession())
+            die('Сначало авторизируйтесь');
         $params = array();
         $lvl = '';
         if(isset($_POST['submit'])){
@@ -105,7 +107,8 @@ class ForumController
             foreach($result as $key => $value){
                 if(Forum::getType($value) == 3)
                     Forum::deleteMessagesByTopic($value);
-                Forum::deleteCategoryById($value);
+                if(Forum::deleteCategoryById($value))
+                    header('Location: /admin');
             }
         }
         require_once(ROOT . '/views/admin/delete_category.php');

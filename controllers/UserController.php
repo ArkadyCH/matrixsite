@@ -40,6 +40,7 @@ class UserController
         $params['name'] = '';
         $params['email'] = '';
         $params['password'] = '';
+        $typefile = array('jpg', 'jpeg', 'png');
         if (isset($_POST['submit'])) {
             foreach ($_POST as $key => $value) {
                 $params[$key] = $value;
@@ -63,7 +64,19 @@ class UserController
 
                 if ($id) {
                     if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                        move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/user/$id.jpg");
+                        $filesize = $_FILES['userfile']['size'];
+                        foreach ($typefile as $value) {
+                            if ($value == substr($_FILES['userfile']['name'], -3)) {
+                                $type = $value;
+                            }
+                        }
+                        if ($type) {
+                            if ($filesize < 3145728) {
+                                move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/user/$id.$type");
+                            } else
+                                $errors[] = 'Размер файла не должен привышать больше 3 МБ!';
+                        } else
+                            $errors[] = 'Недопустимый тип файла!';
                     }
                 }
 
@@ -78,7 +91,7 @@ class UserController
 
     public function actionEdit($id)
     {
-        if(!User::getUserById($_SESSION['user_id']))
+        if (!User::getUserById($_SESSION['user_id']))
             die('У вас нету прав к этой странице');
         $user = User::getUserById($id);
         $name = '';
@@ -95,7 +108,7 @@ class UserController
             if (!User::validateName($name)) {
                 $errors[] = 'Логин не должен быть пустым и его длина должна быть не меньше 6 символов';
             }
-            if($email != $user['email']){
+            if ($email != $user['email']) {
                 if (User::validateEmail($email)) {
                     $errors[] = 'Такой E-mail уже зарегистрирован';
                 }
@@ -104,11 +117,9 @@ class UserController
                 if (User::validatePassword($new_password)) {
                     if (User::checkPassword($id, $old_password)) {
                         User::updateUserPassword($id, $new_password);
-                    }
-                    else
+                    } else
                         $errors[] = 'Неправильный пароль ,проверти правильность введеного пароля';
-                }
-                else
+                } else
                     $errors[] = 'Пароль должен быть > или = 7 символов, а также иметь хотябы 1-у заглавную букву';
             }
 
@@ -116,35 +127,43 @@ class UserController
                 User::updateUser($id, $name, $email);
                 if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
                     $filesize = $_FILES['userfile']['size'];
-                    if($filesize < 3145728){
-                        foreach ($typefile as $value) {
-                            if ($value == substr($_FILES['userfile']['name'], -3)) {
-                                move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/user/$id.$value");
-                                $result = true;
-                            }
+                    $type = '';
+                    foreach ($typefile as $value) {
+                        if ($value == substr($_FILES['userfile']['name'], -3)) {
+                            $type = $value;
                         }
-                    }else
-                        $errors[] = 'Размер файла не должен привышать больше 3 МБ';
-                }
-                if (!$result) {
-                    $errors[] = 'Неправильный тип файла';
-                }
+                    }
+                    if ($type) {
+                        if ($filesize < 3145728) {
+                            move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/user/$id.$type");
+                            $result = true;
+                        } else
+                            $errors[] = 'Размер файла не должен привышать больше 3 МБ!';
+                    } else
+                        $errors[] = 'Недопустимый тип файла!';
 
+                } else
+                    $errors[] = 'Файл небыл загружен!';
+            }
+            if ($result) {
+                header('Location: /cabinet');
             }
         }
-
         require_once(ROOT . '/views/auth/edit.php');
         return true;
     }
-    public function actionDelete(){
+
+    public
+    function actionDelete()
+    {
         Admin::isAdmin();
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             $name = $_POST['user_name'];
             $errors = false;
-            if(User::getUserByName($name)){
+            if (User::getUserByName($name)) {
                 User::deleteUser($name);
                 $errors[] = 'Пользователь удалён';
-            }else
+            } else
                 $errors[] = 'Такого пользователя несуществует';
         }
         require_once(ROOT . '/views/admin/delete_user.php');
