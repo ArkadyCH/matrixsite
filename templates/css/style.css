@@ -16,6 +16,8 @@
     text-align: center;
 }
 .forum-box{
+    position: relative;
+
     padding: 30px;
     width: 1170px;
     margin-top: 20px;
@@ -41,7 +43,23 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 .user_topic{
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    float:left;
+
+    height: 100%;
     width: 160px;
+
+    margin-top: 100px;
+    margin-left: 15px;
+}
+.topic_description{
+    margin-left: 160px;
+}
+.topic_description img{
+    max-width: 950px;
 }
 .user_img img{
     width: 150px;
