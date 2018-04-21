@@ -5,6 +5,9 @@
 return array(
     'download/soft/([a-zA-Z0-9]+).([a-z]+)' => 'matrix/downloadSoft/$1/$2',
     'download' => 'matrix/download',
+    'upload/soft' => 'matrix/uploadSoft',
+    'delete/soft' => 'matrix/deleteSoft',
+    'edit/soft' => 'matrix/editSoft',
 
     'login' => 'user/login',
     'sign' => 'user/sign',
@@ -24,6 +27,5 @@ return array(
 
     'cabinet' => 'matrix/cabinet',
     'admin' => 'matrix/admin',
-    'upload/soft' => 'matrix/uploadSoft',
     'infographic' => 'matrix/infographic'
 );

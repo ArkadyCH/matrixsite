@@ -118,4 +118,51 @@ class Matrix
             return $result;
         return false;
     }
+    public static function getListFiles(){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM files";
+
+        $db = $connect->query($sql);
+
+        $list = array();
+        $i=0;
+        while($row = $db->fetch()){
+            $list[$i]['id'] = $row['id'];
+            $list[$i]['filename'] = $row['filename'];
+            $list[$i]['status'] = $row['status'];
+            $i++;
+        }
+
+        return $list;
+    }
+    public static function deleteFile($id){
+        $connect = DataBase::getConnection();
+        $sql = "DELETE FROM files WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":id", $id, PDO::PARAM_STR);
+        $db->execute();
+
+        return  $db->execute();
+    }
+    public static function setOld($id){
+        $connect = DataBase::getConnection();
+        $sql = "UPDATE  files SET status = 'old' WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":id", $id, PDO::PARAM_STR);
+        $db->execute();
+
+        return  $db->execute();
+    }
+    public static function setCurrent($id){
+        $connect = DataBase::getConnection();
+        $sql = "UPDATE  files SET status = 'current' WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":id", $id, PDO::PARAM_STR);
+        $db->execute();
+
+        return  $db->execute();
+    }
 }

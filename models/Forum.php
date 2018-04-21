@@ -308,4 +308,16 @@ class Forum
             return $result['type_id'];
         return false;
     }
+    public static function sectionIsTopics($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM forum WHERE parent_id = :id AND type_id = 3";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetchAll())
+            return true;
+        return false;
+    }
 }

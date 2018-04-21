@@ -103,4 +103,45 @@ class MatrixController
         require_once(ROOT . '/views/matrix/infographic.php');
         return true;
     }
+    public function actionDeleteSoft(){
+        $list = Matrix::getListFiles();
+        $type = '';
+        if(isset($_POST['submit'])){
+            $id = $_POST['id'];
+            foreach ($list as $key => $value){
+                if($value['id'] == $id)
+                    $type = substr($value['filename'] , -4);
+            }
+            Matrix::deleteFile($id);
+            unlink($_SERVER['DOCUMENT_ROOT'].'/upload/softs/'.$id.$type);
+            header('Location: /admin');
+        }
+        require_once(ROOT . '/views/admin/delete_soft.php');
+        return true;
+    }
+    public function actionEditSoft(){
+        $list = Matrix::getListFiles();
+        $status = '';
+        $errors = '';
+        $current_id ='';
+        if(isset($_POST['submit'])){
+            $id = $_POST['id'];
+            foreach ($list as $key => $value){
+                if($value['id'] == $id)
+                    $status = $value['status'];
+            }
+            foreach ($list as $key => $value){
+                if($value['status'] == 'current')
+                    $current_id = $value['id'];
+            }
+            if($status != 'current'){
+                Matrix::setOld($current_id);
+                Matrix::setCurrent($id);
+                header('Location: /admin');
+            } else
+                $errors = 'Вы выбрали файл, который и так является текущим';
+        }
+        require_once(ROOT . '/views/admin/edit_soft.php');
+        return true;
+    }
 }

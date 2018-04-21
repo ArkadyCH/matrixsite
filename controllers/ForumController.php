@@ -15,6 +15,8 @@ class ForumController
     }
 
     public function actionViewCategory($id){
+        $isLogged = User::checkUserSession();
+        $isTopics =  Forum::sectionIsTopics($id);
         $listSections= Forum::getCategoriesById($id);
         $listCategories = Forum::getCategoriesBySectionId($id);
         $listTopic = Forum::getTopicById($id);
