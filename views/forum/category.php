@@ -2,47 +2,50 @@
 <html>
 <head>
     <title>Download</title>
-    <?php include ROOT.'/views/matrix/link.php';?>
+    <?php include ROOT . '/views/matrix/link.php'; ?>
 </head>
 <body>
-<?php include ROOT.'/views/matrix/header.php';?>
+<?php include ROOT . '/views/matrix/header.php'; ?>
 
 <div class="forum-box center">
     <h1 class="text-align">Форум</h1>
-    <?php foreach($listSections as $key => $value): ?>
+    <?php foreach ($listSections as $key => $value): ?>
         <div class="section">
             <table class="table shadow" style="height: 100px;">
                 <tbody>
                 <tr class="table-info">
                     <td colspan="4">
                         <?php echo $value['title_name']; ?>
-                            <a class="float-right" href="/forum/create/topic/<?php echo $value['id'];?>">Создать тему</a>
+                        <?php if ($isLogged && ($isTopics || !$listCategories)): ?>
+                            <a class="float-right" href="/forum/create/topic/<?php echo $value['id']; ?>">Создать
+                                тему</a>
+                        <?php endif; ?>
                     </td>
                 </tr>
-                <?php if(isset($listCategories) && $listCategories[$key]['type_id'] == 2): ?>
-                <tr class="table-active">
-                    <td class="forumNameTd"></td>
-                    <td>Темы</td>
-                    <td>Сообщения</td>
-                    <td>Описание</td>
-                </tr>
+                <?php if (isset($listCategories) && $listCategories[$key]['type_id'] == 2): ?>
+                    <tr class="table-active">
+                        <td class="forumNameTd"></td>
+                        <td>Темы</td>
+                        <td>Сообщения</td>
+                        <td>Описание</td>
+                    </tr>
                     <?php foreach ($listCategories as $categories => $category): ?>
                         <tr>
                             <td class="align-middle">
-                                <a href="/forum/<?php echo $category['id'];?>"><?php echo $category['title_name']?></a>
+                                <a href="/forum/<?php echo $category['id']; ?>"><?php echo $category['title_name'] ?></a>
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getCountTopic($category['id']);?>
+                                <?php echo Forum::getCountTopic($category['id']); ?>
                             </td>
                             <td class="align-middle text-align">
                                 0
                             </td>
                             <td class="align-middle">
-                                <?php echo $category['description']?>
+                                <?php echo $category['description'] ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                <?php elseif($listCategories[$key]['type_id'] == 3): ?>
+                <?php elseif ($listCategories[$key]['type_id'] == 3): ?>
                     <tr class="table-active">
                         <td class="forumNameTd"></td>
                         <td class="align-middle text-align">Ответов</td>
@@ -51,13 +54,13 @@
                     <?php foreach ($listCategories as $categories => $topic): ?>
                         <tr>
                             <td class="align-middle">
-                                <a href="/topic/<?php echo $topic['id'];?>"><?php echo $topic['title_name']?></a>
+                                <a href="/topic/<?php echo $topic['id']; ?>"><?php echo $topic['title_name'] ?></a>
                             </td>
                             <td class="align-middle text-align">
                                 0
                             </td>
                             <td class="align-middle">
-                                <?php echo User::getUserNameById($value['user_id']);?>
+                                <?php echo User::getUserNameById($value['user_id']); ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

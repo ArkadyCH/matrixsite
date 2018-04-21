@@ -13,8 +13,13 @@
         <a class="btn btn-link" href="forum/create/category">Создать категорию</a>
         <a class="btn btn-link" href="forum/delete">Удалить категорию/тему</a>
         <a class="btn btn-link" href="forum/edit">Изменить категорию/тему</a>
+        <br>
+        <a class="btn btn-link" href="upload/soft">Загрузить программу</a>
+        <a class="btn btn-link" href="delete/soft">Удалить программу</a>
+        <a class="btn btn-link" href="edit/soft">Изменить статус программы</a>
+        <br>
         <a class="btn btn-link" href="user/delete">Удалить пользователя</a>
-        <a class="btn btn-link" href="upload/soft">Загрузить программу на сайт</a>
+        <br>
         <a class="btn btn-link" href="infographic">Инфографика</a>
     </div>
 </div>

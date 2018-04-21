@@ -16,10 +16,18 @@
     text-align: center;
 }
 .forum-box{
+    padding: 30px;
+    width: 1170px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    background: white;
+}
+.topic-box{
     position: relative;
 
     padding: 30px;
     width: 1170px;
+    min-height: 400px;
     margin-top: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.25);
     background: white;

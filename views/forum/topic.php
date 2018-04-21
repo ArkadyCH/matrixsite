@@ -7,7 +7,7 @@
 <body>
 <?php include ROOT . '/views/matrix/header.php'; ?>
 
-<div class="forum-box center">
+<div class="topic-box center">
     <?php foreach ($topic as $key => $value): ?>
         <p>Дата: <?php echo $value['data']; ?></p>
         <h1  class="text-align"><?php echo $value['title_name']; ?></h1>
