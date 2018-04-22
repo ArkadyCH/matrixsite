@@ -21,6 +21,8 @@ class MatrixController
             die('Вы не авторизированы');
         $user = User::getUserById($_SESSION['user_id']);
         $permission = User::getUserPermission($user['id']);
+        $messages = Forum::getCountUserMessages($user['id']);
+        $topics = Forum::getCountTopicByUserId($user['id']);
         require_once(ROOT . '/views/matrix/cabinet.php');
         return true;
     }

@@ -15,6 +15,11 @@
         <div class="text-align">
             <p><?php echo $user['name']; ?></p>
             <p><?php echo $user['email']; ?></p>
+            <?php if ($permission == "admin"): ?>
+                <p>Роль: Администратор</p>
+            <?php endif; ?>
+            <p>Тем: <?php echo $topics; ?></p>
+            <p>Сообщений: <?php echo $messages; ?></p>
         </div>
         <div class="text-align">
             <a href="/user/edit/<?php echo $user['id'];?>" class="btn btn-primary">Редактировать</a>
