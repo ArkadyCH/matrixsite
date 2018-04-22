@@ -55,7 +55,23 @@ class TopicController
         return true;
     }
     public function actionDelete($id){
-        require_once(ROOT . '/views/topic/delete.php');
+        Topic::deleteTopic($id);
+        Forum::deleteMessagesByTopic($id);
+        $path = Matrix::GoBack();
+        header("Location: $path");
+    }
+    public function actionEdit($id){
+        $topic = Topic::getTopicById($id);
+        if(isset($_POST['submit'])){
+            $title_name = $_POST['title_name'];
+            $description = $_POST['description'];
+            if(Topic::editTopic($id,$title_name,$description)){
+                header("Location: /topic/$id");
+            }else
+                echo 'fuck';
+
+        }
+        require_once(ROOT . '/views/topic/edit.php');
         return true;
     }
 }

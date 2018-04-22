@@ -12,6 +12,4 @@ class Matrix
     {
         return $_SERVER['HTTP_REFERER'];
     }
-
-
 }

@@ -152,6 +152,8 @@ class Forum
     }
     public static function getTree(){
         $roots = Forum::getRoots();
+        $tree = array();
+        $list = array();
         foreach($roots as $key => $value){
             $tree[] = Forum::getChildById($value['id']);
         }

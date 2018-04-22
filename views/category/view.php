@@ -16,7 +16,7 @@
                 <tr class="table-info">
                     <td colspan="4">
                         <?php echo $value['title_name']; ?>
-                        <?php if ($isLogged && ($isTopics || !$listCategories)): ?>
+                        <?php if ($isLogged && ($isTopics || !$listCategories) && $value['type_id'] != 1): ?>
                             <a class="float-right" href="/topic/create/<?php echo $value['id']; ?>">Создать
                                 тему</a>
                         <?php endif; ?>
@@ -38,7 +38,7 @@
                                 <?php echo Topic::getCountTopic($category['id']); ?>
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getCountAllMessages($value['id']);?>
+                                <?php echo Forum::getCountAllMessages($value['id']); ?>
                             </td>
                             <td class="align-middle">
                                 <?php echo $category['description'] ?>
@@ -49,7 +49,7 @@
                     <tr class="table-active">
                         <td class="forumNameTd"></td>
                         <td class="align-middle text-align">Ответов</td>
-                        <td>Автор</td>
+                        <td colspan="2">Автор</td>
                     </tr>
                     <?php foreach ($listCategories as $categories => $topic): ?>
                         <tr>
@@ -57,13 +57,18 @@
                                 <a href="/topic/<?php echo $topic['id']; ?>"><?php echo $topic['title_name'] ?></a>
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getCountMessages($topic['id']);?>
+                                <?php echo Forum::getCountMessages($topic['id']); ?>
                             </td>
                             <td class="align-middle">
                                 <?php echo User::getUserNameById($topic['user_id']); ?>
                             </td>
+                            <td>
+                                <a class="" href="/topic/delete/<?php echo $topic['id']; ?>">Удалить</a>
+                                <a class="" href="/topic/edit/<?php echo $topic['id']; ?>">Редактировать</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
+
                 <?php else: ?>
                     <tr class="table-danger">
                         <td> В этой секции нету категорий и тем</td>

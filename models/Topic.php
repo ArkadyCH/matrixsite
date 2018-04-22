@@ -75,7 +75,7 @@ class Topic
     }
     public static function deleteTopic($id){
         $connect = DataBase::getConnection();
-        $sql = "DELETE FROM topic WHERE id = :id";
+        $sql = "DELETE FROM forum WHERE id = :id";
 
         $db = $connect->prepare($sql);
         $db->bindParam(":id",$id,PDO::PARAM_STR);
@@ -84,7 +84,7 @@ class Topic
     }
     public static function editTopic($id , $title_name , $description){
         $connect = DataBase::getConnection();
-        $sql = "UPDATE topic SET title_name = :title_name , description = :description WHERE id = :id";
+        $sql = "UPDATE forum SET title_name = :title_name , description = :description WHERE id = :id";
 
         $db = $connect->prepare($sql);
         $db->bindParam(":id",$id,PDO::PARAM_STR);
