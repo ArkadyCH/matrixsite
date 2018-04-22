@@ -15,9 +15,11 @@
                     <a class="nav-link" href="/login">Вход <i class="fa fa-sign-in"></i></a>
                 </li>
             <?php else: ?>
-            <?php $user = User::getUserById($_SESSION['user_id']);?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/<?php echo $user['id'];?>"><?php echo $user['name'];?> <i class="fa fa-user"></i></a>
+                    <a class="nav-link" href="/profile/<?php echo $_SESSION['user_id'];?>"><?php echo User::getUserNameById($_SESSION['user_id']);?> <i class="fa fa-user"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/message">Сообщения</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Выход <i class="fa fa-sign-out"></i></a>

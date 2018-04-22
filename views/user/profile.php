@@ -28,6 +28,10 @@
                     <a href="/admin" class="btn btn-primary">Админ панель</a>
                 <?php endif; ?>
             </div>
+        <?php else: ?>
+            <div class="text-align">
+                <a href="/message/to/<?php echo $usver['id']; ?>" class="btn btn-primary ">Отправить сообщение</a>
+            </div>
         <?php endif; ?>
     </div>
 </div>

@@ -31,5 +31,8 @@ return array(
 
     'profile/([0-9]+)' => 'user/profile/$1',
     'admin' => 'matrix/admin',
-    'infographic' => 'matrix/infographic'
+    'infographic' => 'matrix/infographic',
+
+    'message/to/([0-9]+)' => 'message/create/$1',
+    'messages/([0-9]+)' => 'message/index/$1'
 );
