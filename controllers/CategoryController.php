@@ -15,7 +15,7 @@ class CategoryController
         $listCategories = Category::getCategoriesBySectionId($id);
         $listTopic = Topic::getTopicById($id);
 
-        require_once(ROOT . '/views/forum/category.php');
+        require_once(ROOT . '/views/category/view.php');
         return true;
     }
     public function actionCreate(){

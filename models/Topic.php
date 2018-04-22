@@ -73,4 +73,24 @@ class Topic
             return $result;
         return false;
     }
+    public static function deleteTopic($id){
+        $connect = DataBase::getConnection();
+        $sql = "DELETE FROM topic WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":id",$id,PDO::PARAM_STR);
+
+        return $db->execute();
+    }
+    public static function editTopic($id , $title_name , $description){
+        $connect = DataBase::getConnection();
+        $sql = "UPDATE topic SET title_name = :title_name , description = :description WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":id",$id,PDO::PARAM_STR);
+        $db->bindParam(":title_name",$title_name,PDO::PARAM_STR);
+        $db->bindParam(":description",$description,PDO::PARAM_STR);
+
+        return $db->execute();
+    }
 }

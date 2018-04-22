@@ -54,7 +54,8 @@ class TopicController
         require_once(ROOT . '/views/topic/create.php');
         return true;
     }
-    public function actionDelete(){
-
+    public function actionDelete($id){
+        require_once(ROOT . '/views/topic/delete.php');
+        return true;
     }
 }
