@@ -18,7 +18,7 @@ class Admin
         $result = $db->fetch();
         if($result['permission'] == 'admin'){
             return true;
-        }else
-            die('У вас недостаточно прав находить на данной странице');
+        }
+        return false;
     }
 }

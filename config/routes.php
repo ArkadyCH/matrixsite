@@ -29,7 +29,7 @@ return array(
 
     'forum' => 'forum/view',
 
-    'cabinet' => 'matrix/cabinet',
+    'profile/([0-9]+)' => 'user/profile/$1',
     'admin' => 'matrix/admin',
     'infographic' => 'matrix/infographic'
 );

@@ -153,10 +153,10 @@ class UserController
         return true;
     }
 
-    public
-    function actionDelete()
+    public function actionDelete()
     {
-        Admin::isAdmin();
+        if(!Admin::isAdmin())
+            die('У вас нет прав находить на данной странице');
         if (isset($_POST['submit'])) {
             $name = $_POST['user_name'];
             $errors = false;
@@ -167,6 +167,17 @@ class UserController
                 $errors[] = 'Такого пользователя несуществует';
         }
         require_once(ROOT . '/views/user/delete.php');
+        return true;
+    }
+    public function actionProfile($id)
+    {
+        if (!User::checkUserSession())
+            die('Вы не авторизированы');
+        $usver = User::getUserById($id);
+        $permission = User::getUserPermission($usver['id']);
+        $messages = Forum::getCountUserMessages($usver['id']);
+        $topics = Topic::getCountTopicByUserId($usver['id']);
+        require_once(ROOT . '/views/user/profile.php');
         return true;
     }
 }

@@ -63,7 +63,7 @@ class Topic
     }
     public static function getTopicMessages($id){
         $connect = DataBase::getConnection();
-        $sql = "SELECT * FROM messages WHERE topic_id = :id";
+        $sql = "SELECT * FROM topic_messages WHERE topic_id = :id";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':id' , $id , PDO::PARAM_STR);

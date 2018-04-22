@@ -10,7 +10,6 @@
 <div class="topic-box center">
     <?php foreach ($topic as $key => $value): ?>
         <p>Дата: <?php echo $value['data']; ?></p>
-        <h1  class="text-align"><?php echo $value['title_name']; ?></h1>
         <div class="user_topic center">
             <div class="user_img">
                 <img class="center" src="<?php echo User::getImage($value['user_id']); ?>">
@@ -22,6 +21,7 @@
             </div>
         </div>
         <div class="topic_description">
+            <h1  class="text-align"><?php echo $value['title_name']; ?></h1>
             <?php echo $value['description']; ?>
         </div>
     <?php endforeach; ?>
@@ -36,7 +36,7 @@
                     <img class="center" src="<?php echo User::getImage($value['user_id']); ?>">
                 </div>
                 <div class="information float-left">
-                    <p><?php echo $user_message['name']; ?></p>
+                    <p><a href="/profile/<?php echo $value['user_id'];?>"><?php echo $user_message['name']; ?></a></p>
                     <p>Тем: <?php echo Topic::getCountTopicByUserId($value['user_id']); ?></p>
                     <p>Сообщений: <?php echo Forum::getCountUserMessages($user_message['id']); ?></p>
                 </div>

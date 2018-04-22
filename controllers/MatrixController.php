@@ -8,21 +8,10 @@
 
 class MatrixController
 {
-    public function actionCabinet()
-    {
-        if (!User::checkUserSession())
-            die('Вы не авторизированы');
-        $user = User::getUserById($_SESSION['user_id']);
-        $permission = User::getUserPermission($user['id']);
-        $messages = Forum::getCountUserMessages($user['id']);
-        $topics = Topic::getCountTopicByUserId($user['id']);
-        require_once(ROOT . '/views/matrix/cabinet.php');
-        return true;
-    }
-
     public function actionAdmin()
     {
-        Admin::isAdmin();
+        if(!Admin::isAdmin())
+            die('У вас нет прав находить на данной странице');
         require_once(ROOT . '/views/admin/panel.php');
         return true;
     }

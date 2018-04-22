@@ -193,4 +193,15 @@ class User
             return true;
         return false;
     }
+    public static function getUserByTopicId($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM forum WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":id" , $id , PDO::PARAM_STR);
+        $db->execute();
+        if($result = $db->fetch())
+            return $result['user_id'];
+        return false;
+    }
 }

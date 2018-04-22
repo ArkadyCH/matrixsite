@@ -17,7 +17,7 @@
             <?php else: ?>
             <?php $user = User::getUserById($_SESSION['user_id']);?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cabinet"><?php echo $user['name'];?> <i class="fa fa-user"></i></a>
+                    <a class="nav-link" href="/profile/<?php echo $user['id'];?>"><?php echo $user['name'];?> <i class="fa fa-user"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Выход <i class="fa fa-sign-out"></i></a>

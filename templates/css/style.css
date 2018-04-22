@@ -16,6 +16,7 @@
     text-align: center;
 }
 .forum-box{
+    position: relative;
     padding: 30px;
     width: 1170px;
     margin-top: 20px;

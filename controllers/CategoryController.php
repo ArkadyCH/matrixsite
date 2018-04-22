@@ -19,7 +19,8 @@ class CategoryController
         return true;
     }
     public function actionCreate(){
-        Admin::isAdmin();
+        if(!Admin::isAdmin())
+            die('У вас нет прав находить на данной странице');
         $params = array();
         $lvl = '';
         if(isset($_POST['submit'])){
@@ -48,7 +49,8 @@ class CategoryController
         return true;
     }
     public function actionDelete(){
-        Admin::isAdmin();
+        if(!Admin::isAdmin())
+            die('У вас нет прав находить на данной странице');
         $id = '';
         $list = Forum::getTree();
         if(isset($_POST['submit'])) {
@@ -65,7 +67,8 @@ class CategoryController
         return true;
     }
     public function actionEdit(){
-        Admin::isAdmin();
+        if(!Admin::isAdmin())
+            die('У вас нет прав находить на данной странице');
         $list = Forum::getTree();
 
         $title_name = '';

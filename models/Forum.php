@@ -130,7 +130,7 @@ class Forum
     }
     public static function getCountMessages($id){
         $connect = DataBase::getConnection();
-        $sql = "SELECT * FROM messages WHERE topic_id = :id";
+        $sql = "SELECT * FROM topic_messages WHERE topic_id = :id";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':id' , $id , PDO::PARAM_STR);
@@ -182,7 +182,7 @@ class Forum
     }
     public static function setMessage($message , $user_id , $parent_id , $topic_id){
         $connect = DataBase::getConnection();
-        $sql = "INSERT INTO messages (message , user_id , parent_id , topic_id)".
+        $sql = "INSERT INTO topic_messages (message , user_id , parent_id , topic_id)".
             " VALUES (:message,:user_id,:parent_id,:topic_id)";
 
         $db = $connect->prepare($sql);
@@ -195,7 +195,7 @@ class Forum
     }
     public static function getCountUserMessages($id){
         $connect = DataBase::getConnection();
-        $sql = "SELECT * FROM messages WHERE user_id = :id";
+        $sql = "SELECT * FROM topic_messages WHERE user_id = :id";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':id' , $id , PDO::PARAM_STR);
@@ -205,7 +205,7 @@ class Forum
     }
     public static function deleteMessagesByTopic($id){
         $connect = DataBase::getConnection();
-        $sql = "DELETE FROM messages WHERE topic_id = :id";
+        $sql = "DELETE FROM topic_messages WHERE topic_id = :id";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':id' , $id , PDO::PARAM_STR);

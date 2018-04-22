@@ -57,7 +57,8 @@ class SoftController
     }
     public function actionUpload()
     {
-        Admin::isAdmin();
+        if(!Admin::isAdmin())
+            die('У вас нет прав находить на данной странице');
         $typefile = array('rar', 'zip', 'exe');
         $result = false;
         $errors = false;
