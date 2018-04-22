@@ -31,20 +31,20 @@ class TopicController
     public function actionCreate($id){
         if(!User::checkUserSession())
             die('Сначало авторизируйтесь');
-        $params = array();
         $lvl = '';
+        $title_name = '';
+        $description ='';
         if(isset($_POST['submit'])){
-            foreach($_POST as $key=>$value){
-                $params[$key] = $value;
-            }
+            $title_name = $_POST['title_name'];
+            $description = $_POST['$description'];
 
             if(isset($_SESSION['user_id'])){
                 $user_id = $_SESSION['user_id'];
             }
             $type_id = 3;
             $parent_id = $id;
-            $lvl = $lvl = Forum::getRootLvl($parent_id)+1;
-            if(Topic::saveTopic($params['title_name'],$params['description'],$parent_id , $user_id , $type_id,$lvl)){
+            $lvl = Forum::getRootLvl($parent_id)+1;
+            if(Topic::saveTopic($title_name,$description,$parent_id , $user_id , $type_id,$lvl)){
                 header('Location: /forum');
             }else{
                 echo 'misha vse xuina';
