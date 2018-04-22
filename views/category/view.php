@@ -62,10 +62,12 @@
                             <td class="align-middle">
                                 <?php echo User::getUserNameById($topic['user_id']); ?>
                             </td>
+                            <?php if(Admin::isAdmin()): ?>
                             <td>
-                                <a class="" href="/topic/delete/<?php echo $topic['id']; ?>">Удалить</a>
-                                <a class="" href="/topic/edit/<?php echo $topic['id']; ?>">Редактировать</a>
+                                <a class="" href="/topic/delete/<?php echo $topic['id']; ?>">Удалить <i class="fa fa-trash-o "></i></a>
+                                <a class="" href="/topic/edit/<?php echo $topic['id']; ?>">Редактировать <i class="fa fa-edit"></i></a>
                             </td>
+                            <?php endif;?>
                         </tr>
                     <?php endforeach; ?>
 

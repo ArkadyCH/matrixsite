@@ -55,12 +55,14 @@ class TopicController
         return true;
     }
     public function actionDelete($id){
+        Admin::isAdmin();
         Topic::deleteTopic($id);
         Forum::deleteMessagesByTopic($id);
         $path = Matrix::GoBack();
         header("Location: $path");
     }
     public function actionEdit($id){
+        Admin::isAdmin();
         $topic = Topic::getTopicById($id);
         if(isset($_POST['submit'])){
             $title_name = $_POST['title_name'];
