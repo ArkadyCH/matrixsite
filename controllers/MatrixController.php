@@ -15,7 +15,7 @@ class MatrixController
         $user = User::getUserById($_SESSION['user_id']);
         $permission = User::getUserPermission($user['id']);
         $messages = Forum::getCountUserMessages($user['id']);
-        $topics = Forum::getCountTopicByUserId($user['id']);
+        $topics = Topic::getCountTopicByUserId($user['id']);
         require_once(ROOT . '/views/matrix/cabinet.php');
         return true;
     }
@@ -29,7 +29,7 @@ class MatrixController
 
 
     public function actionInfographic(){
-        $files = Matrix::getFileStats(1);
+        $files = Soft::getFileStats(1);
         foreach ($files as $key => $value) {
             $users[] = User::getUserNameById($value['user_id'])." ".$value['data'];
             $count[] = $value['count'];

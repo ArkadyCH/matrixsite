@@ -17,7 +17,7 @@
             </div>
             <div class="information">
                 <p><?php echo User::getUserNameById($value['user_id']); ?></p>
-                <p>Тем: <?php echo Forum::getCountTopicByUserId($value['user_id']); ?></p>
+                <p>Тем: <?php echo Topic::getCountTopicByUserId($value['user_id']); ?></p>
                 <p>Сообщений: <?php echo Forum::getCountUserMessages($value['user_id']); ?></p>
             </div>
         </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="information float-left">
                     <p><?php echo $user_message['name']; ?></p>
-                    <p>Тем: <?php echo Forum::getCountTopicByUserId($value['user_id']); ?></p>
+                    <p>Тем: <?php echo Topic::getCountTopicByUserId($value['user_id']); ?></p>
                     <p>Сообщений: <?php echo Forum::getCountUserMessages($user_message['id']); ?></p>
                 </div>
             </div>

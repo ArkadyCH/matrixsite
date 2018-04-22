@@ -17,7 +17,7 @@
                     <td colspan="4">
                         <?php echo $value['title_name']; ?>
                         <?php if ($isLogged && ($isTopics || !$listCategories)): ?>
-                            <a class="float-right" href="/forum/create/topic/<?php echo $value['id']; ?>">Создать
+                            <a class="float-right" href="/topic/create/<?php echo $value['id']; ?>">Создать
                                 тему</a>
                         <?php endif; ?>
                     </td>
@@ -32,10 +32,10 @@
                     <?php foreach ($listCategories as $categories => $category): ?>
                         <tr>
                             <td class="align-middle">
-                                <a href="/forum/<?php echo $category['id']; ?>"><?php echo $category['title_name'] ?></a>
+                                <a href="/category/<?php echo $category['id']; ?>"><?php echo $category['title_name'] ?></a>
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getCountTopic($category['id']); ?>
+                                <?php echo Topic::getCountTopic($category['id']); ?>
                             </td>
                             <td class="align-middle text-align">
                                 <?php echo Forum::getCountAllMessages($value['id']);?>
@@ -60,7 +60,7 @@
                                 <?php echo Forum::getCountMessages($topic['id']);?>
                             </td>
                             <td class="align-middle">
-                                <?php echo User::getUserNameById($value['user_id']); ?>
+                                <?php echo User::getUserNameById($topic['user_id']); ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

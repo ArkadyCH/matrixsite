@@ -19,7 +19,7 @@
                            href="/category/<?php echo $value['id']; ?>"><?php echo $value['title_name']; ?></a>
                     </td>
                 </tr>
-                <?php $listCategories = Forum::getCategoriesBySectionId($value['id']) ?>
+                <?php $listCategories = Category::getCategoriesBySectionId($value['id']) ?>
                 <?php if (isset($listCategories) && is_array($listCategories)): ?>
                     <tr class="table-active">
                         <td class="forumNameTd"></td>
@@ -33,7 +33,7 @@
                                 <a href="/category/<?php echo $value['id']; ?>"><?php echo $value['title_name'] ?></a>
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getCountTopic($value['id']); ?>
+                                <?php echo Topic::getCountTopic($value['id']); ?>
                             </td>
                             <td class="align-middle text-align">
                                 <?php echo Forum::getCountAllMessages($value['id']);?>

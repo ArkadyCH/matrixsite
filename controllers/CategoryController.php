@@ -13,7 +13,7 @@ class CategoryController
         $isTopics =  Forum::sectionIsTopics($id);
         $listSections= Category::getCategoriesById($id);
         $listCategories = Category::getCategoriesBySectionId($id);
-        $listTopic = Forum::getTopicById($id);
+        $listTopic = Topic::getTopicById($id);
 
         require_once(ROOT . '/views/forum/category.php');
         return true;

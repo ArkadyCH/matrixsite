@@ -22,8 +22,8 @@ return array(
     'category/delete' => 'category/delete',
     'category/edit' => 'category/edit',
 
-    'forum/create/topic/([0-9]+)' => 'forum/createTopic/$1',
-    'topic/([0-9]+)' => 'forum/viewTopic/$1',
+    'topic/create/([0-9]+)' => 'topic/create/$1',
+    'topic/([0-9]+)' => 'topic/view/$1',
 
     'forum' => 'forum/view',
 
