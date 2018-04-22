@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Download</title>
-    <?php include ROOT.'/views/matrix/link.php';?>
+    <?php include ROOT . '/views/matrix/link.php';?>
     <meta charset="Utf-8">
 </head>
 <body>
-<?php include ROOT.'/views/matrix/header.php';?>
+<?php include ROOT . '/views/matrix/header.php';?>
 <?php if(isset($result)):?>
     <p class="center">Вы успешно зарегистрировались</p>
 <?php else: ?>

@@ -24,6 +24,8 @@ return array(
 
     'topic/create/([0-9]+)' => 'topic/create/$1',
     'topic/([0-9]+)' => 'topic/view/$1',
+    'topic/delete/([0-9]+)' => 'topic/delete/$1',
+    'topic/edit/([0-9]+)' => 'topic/edit/$1',
 
     'forum' => 'forum/view',
 

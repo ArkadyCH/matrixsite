@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Download</title>
-    <?php include ROOT.'/views/matrix/link.php';?>
+    <?php include ROOT . '/views/matrix/link.php';?>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -23,7 +23,7 @@
     </script>
 </head>
 <body>
-<?php include ROOT.'/views/matrix/header.php';?>
+<?php include ROOT . '/views/matrix/header.php';?>
 
 <div class="forum-box center">
     <form method="post">

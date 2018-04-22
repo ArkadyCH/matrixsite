@@ -44,7 +44,7 @@ class CategoryController
             }
         }
         $list = Forum::getTree();
-        require_once(ROOT . '/views/admin/create_category.php');
+        require_once(ROOT . '/views/category/create.php');
         return true;
     }
     public function actionDelete(){
@@ -61,7 +61,7 @@ class CategoryController
                     header('Location: /admin');
             }
         }
-        require_once(ROOT . '/views/admin/delete_category.php');
+        require_once(ROOT . '/views/category/delete.php');
         return true;
     }
     public function actionEdit(){
@@ -95,7 +95,7 @@ class CategoryController
             if(Forum::updateElemebt($id , $title_name,$description,$parent_id , $lvl))
                 $result = false;
         }
-        require_once(ROOT . '/views/admin/edit_category.php');
+        require_once(ROOT . '/views/category/edit.php');
         return true;
     }
 }

@@ -25,7 +25,7 @@ class TopicController
             }
         }
 
-        require_once(ROOT . '/views/forum/topic.php');
+        require_once(ROOT . '/views/topic/topic.php');
         return true;
     }
     public function actionCreate($id){
@@ -51,7 +51,10 @@ class TopicController
             }
         }
         $title_name = Forum::getListSection();
-        require_once(ROOT . '/views/forum/create_topic.php');
+        require_once(ROOT . '/views/topic/create.php');
         return true;
+    }
+    public function actionDelete(){
+
     }
 }

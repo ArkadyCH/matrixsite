@@ -30,7 +30,7 @@ class UserController
                 header("Location: /download");
             }
         }
-        require_once(ROOT . '/views/auth/login.php');
+        require_once(ROOT . '/views/user/login.php');
         return true;
     }
 
@@ -85,7 +85,7 @@ class UserController
             }
         }
 
-        require_once(ROOT . '/views/auth/sign.php');
+        require_once(ROOT . '/views/user/sign.php');
         return true;
     }
 
@@ -149,7 +149,7 @@ class UserController
                 header('Location: /cabinet');
             }
         }
-        require_once(ROOT . '/views/auth/edit.php');
+        require_once(ROOT . '/views/user/edit.php');
         return true;
     }
 
@@ -166,7 +166,7 @@ class UserController
             } else
                 $errors[] = 'Такого пользователя несуществует';
         }
-        require_once(ROOT . '/views/admin/delete_user.php');
+        require_once(ROOT . '/views/user/delete.php');
         return true;
     }
 }

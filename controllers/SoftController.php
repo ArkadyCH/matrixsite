@@ -27,7 +27,7 @@ class SoftController
             unlink($_SERVER['DOCUMENT_ROOT'].'/upload/softs/'.$id.$type);
             header('Location: /admin');
         }
-        require_once(ROOT . '/views/admin/delete_soft.php');
+        require_once(ROOT . '/views/soft/delete.php');
         return true;
     }
     public function actionEdit(){
@@ -52,7 +52,7 @@ class SoftController
             } else
                 $errors = 'Вы выбрали файл, который и так является текущим';
         }
-        require_once(ROOT . '/views/admin/edit_soft.php');
+        require_once(ROOT . '/views/soft/edit.php');
         return true;
     }
     public function actionUpload()
@@ -77,7 +77,7 @@ class SoftController
                 }
             }
         }
-        require_once(ROOT . '/views/admin/upload.php');
+        require_once(ROOT . '/views/soft/upload.php');
         return true;
     }
 
