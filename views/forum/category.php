@@ -38,7 +38,7 @@
                                 <?php echo Forum::getCountTopic($category['id']); ?>
                             </td>
                             <td class="align-middle text-align">
-                                0
+                                <?php echo Forum::getCountAllMessages($value['id']);?>
                             </td>
                             <td class="align-middle">
                                 <?php echo $category['description'] ?>
@@ -57,7 +57,7 @@
                                 <a href="/topic/<?php echo $topic['id']; ?>"><?php echo $topic['title_name'] ?></a>
                             </td>
                             <td class="align-middle text-align">
-                                0
+                                <?php echo Forum::getCountMessages($topic['id']);?>
                             </td>
                             <td class="align-middle">
                                 <?php echo User::getUserNameById($value['user_id']); ?>

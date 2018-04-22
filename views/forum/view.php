@@ -36,7 +36,7 @@
                                 <?php echo Forum::getCountTopic($value['id']); ?>
                             </td>
                             <td class="align-middle text-align">
-                                0
+                                <?php echo Forum::getCountAllMessages($value['id']);?>
                             </td>
                             <td class="align-middle description">
                                 <?php echo $value['description'] ?>

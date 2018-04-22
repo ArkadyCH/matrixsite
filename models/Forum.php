@@ -189,6 +189,37 @@ class Forum
         }
         return count($list);
     }
+    public static function getCountAllMessages($id){
+        $db = Forum::getForum();
+
+        $list = array();
+        $keys = array();
+        $keys[] = $id;
+        $count = 0;
+
+        while($row = $db->fetch()){
+            if(in_array($row['parent_id'], $keys)) {
+                if($row['type_id'] == 3)
+                    $list[] = $row['id'];
+                $keys[] = $row['id'];
+            }
+        }
+        foreach ($list as $item) {
+            $count += self::getCountMessages($item);
+        }
+
+        return $count;
+    }
+    public static function getCountMessages($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT * FROM messages WHERE topic_id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        return $db->rowCount();
+    }
     public static function deleteCategoryById($id){
         $connect = DataBase::getConnection();
         $sql = "DELETE FROM forum WHERE id = :id";
