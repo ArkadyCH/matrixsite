@@ -17,12 +17,12 @@ return array(
     'user/edit/([0-9]+)' => 'user/edit/$1',
     'user/delete' => 'user/delete',
 
-    'forum/create/category' => 'forum/createCategory',
-    'forum/delete' => 'forum/delete',
-    'forum/edit' => 'forum/edit',
+    'category/create/category' => 'category/create',
+    'category/([0-9]+)' => 'category/view/$1',
+    'category/delete' => 'category/delete',
+    'category/edit' => 'category/edit',
 
     'forum/create/topic/([0-9]+)' => 'forum/createTopic/$1',
-    'forum/([0-9]+)' => 'forum/viewCategory/$1',
     'topic/([0-9]+)' => 'forum/viewTopic/$1',
 
     'forum' => 'forum/view',

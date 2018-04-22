@@ -16,7 +16,7 @@
                 <tr class="table-info">
                     <td colspan="4">
                         <a class="text-dark"
-                           href="/forum/<?php echo $value['id']; ?>"><?php echo $value['title_name']; ?></a>
+                           href="/category/<?php echo $value['id']; ?>"><?php echo $value['title_name']; ?></a>
                     </td>
                 </tr>
                 <?php $listCategories = Forum::getCategoriesBySectionId($value['id']) ?>
@@ -30,7 +30,7 @@
                     <?php foreach ($listCategories as $key => $value): ?>
                         <tr>
                             <td class="align-middle">
-                                <a href="/forum/<?php echo $value['id']; ?>"><?php echo $value['title_name'] ?></a>
+                                <a href="/category/<?php echo $value['id']; ?>"><?php echo $value['title_name'] ?></a>
                             </td>
                             <td class="align-middle text-align">
                                 <?php echo Forum::getCountTopic($value['id']); ?>
