@@ -16,10 +16,6 @@
                 lang: 'ru-RU'
             });
         });
-        function getCode(){
-            var description = $('#edit').summernote('code');
-            document.getElementById('description').value = description;
-        }
     </script>
 </head>
 <body>
@@ -31,12 +27,11 @@
             <label for="title_topic">Название</label>
             <input type="text" name="title_name" class="form-control" id="title_topic" placeholder="Введите название" required value="<?php echo $topic[0]['title_name'];?>">
         </div>
-        <textarea name="description" id="description" hidden></textarea>
         <div class="form-group">
             <label for="edit">Описание:</label>
             <textarea class="form-control" name="edit" id="edit" rows="3" required><?php echo $topic[0]['description'];?></textarea>
         </div>
-        <button type="submit" name="submit" class="btn btn-primary" onclick="getCode()">Обновить</button>
+        <button type="submit" name="submit" class="btn btn-primary">Обновить</button>
     </form>
 </div>
 

@@ -36,7 +36,7 @@ class TopicController
         $description ='';
         if(isset($_POST['submit'])){
             $title_name = $_POST['title_name'];
-            $description = $_POST['$description'];
+            $description = $_POST['edit'];
 
             if(isset($_SESSION['user_id'])){
                 $user_id = $_SESSION['user_id'];
@@ -66,7 +66,7 @@ class TopicController
         $topic = Topic::getTopicById($id);
         if(isset($_POST['submit'])){
             $title_name = $_POST['title_name'];
-            $description = $_POST['description'];
+            $description = $_POST['edit'];
             if(Topic::editTopic($id,$title_name,$description)){
                 header("Location: /topic/$id");
             }else
