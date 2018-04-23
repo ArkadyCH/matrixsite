@@ -135,6 +135,7 @@ body{
 }
 .messages{
     height: 430px;
+    overflow: auto;
 }
 .send_message{
     margin: 0 15px 10px 10px;
