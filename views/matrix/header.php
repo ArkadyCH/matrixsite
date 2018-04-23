@@ -19,7 +19,7 @@
                     <a class="nav-link" href="/profile/<?php echo $_SESSION['user_id'];?>"><?php echo User::getUserNameById($_SESSION['user_id']);?> <i class="fa fa-user"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/messages/0">Сообщения</a>
+                    <a class="nav-link" href="/messages">Сообщения</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Выход <i class="fa fa-sign-out"></i></a>

@@ -8,34 +8,47 @@
 
 class MessageController
 {
-    public function actionCreate($id){
-        $text ='';
+    public function actionCreate($id)
+    {
+        $text = '';
         $user_id = '';
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             $text = $_POST['text'];
-            $user_id = $_SESSION['user_id'];
-            Message::saveMessage($text,$user_id,$id);
-            header("Location: /profile/$id");
+            $send = $_SESSION['user_id'];
+            $recive = $id;
+            if (User::getUserById($send)) {
+                if(Message::getDialog($send , $recive))
+                    $dialog_id = Message::updateDialog($send , $recive);
+                else
+                    $dialog_id = Message::saveDialog($send,$recive);
+                Message::saveMessage($text, $send, $dialog_id);
+                header("Location: /profile/$recive");
+            }
         }
         require_once(ROOT . '/views/messages/create.php');
         return true;
     }
-    public function actionIndex($id){
-        $date = "2018-04-22 18:42:03";
 
-        $user_id = Message::getUserIdByMessageId($_SESSION['user_id']);
-        $userList = array();
-        $user_name = User::getUserNameById($id);
-        $messageList = Message::getPersonalMessages($id , $_SESSION['user_id']);
-        foreach ($user_id as $key => $value){
-            $userList[] = User::getUserById($value['from_user_id']);
+    public function actionIndex()
+    {
+        $dialogs = Message::getAllDialog($_SESSION['user_id']);
+
+        require_once(ROOT . '/views/messages/index.php');
+        return true;
+    }
+    public function actionDialog($id){
+        $userId = $_SESSION['user_id'];
+        $dialogs = Message::getAllDialog($userId);
+        foreach ($dialogs as $key => $value){
+            if(($value['send'] == $id && $value['recive'] == $userId) || ($value['send'] == $userId && $value['recive'] == $id))
+                $messageList = Message::getPersonalMessages($value['id']);
         }
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             $message = $_POST['message'];
-            if(Message::saveMessage($message,$_SESSION['user_id'],$id))
+            if (Message::saveMessage($message, $_SESSION['user_id'], $id))
                 header("Location: /messages/$id");
         }
-        require_once(ROOT . '/views/messages/index.php');
+        require_once(ROOT . '/views/messages/view.php');
         return true;
     }
 }

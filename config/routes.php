@@ -34,5 +34,7 @@ return array(
     'infographic' => 'matrix/infographic',
 
     'message/to/([0-9]+)' => 'message/create/$1',
-    'messages/([0-9]+)' => 'message/index/$1'
+    'dialog/([0-9]+)' => 'message/dialog/$1',
+    'messages' => 'message/index',
+
 );
