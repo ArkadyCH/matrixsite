@@ -21,6 +21,8 @@ class MessageController
         return true;
     }
     public function actionIndex($id){
+        $date = "2018-04-22 18:42:03";
+
         $user_id = Message::getUserIdByMessageId($_SESSION['user_id']);
         $userList = array();
         $user_name = User::getUserNameById($id);

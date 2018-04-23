@@ -32,7 +32,7 @@
                     <div class="message-item">
                         <div class="head">
                             <a href="/profile/<?php echo $user['id'];?>" class="float-left"><?php echo $user['name'];?></a>
-                            <p class="d-flex justify-content-end"><?php echo $value['date'];?></p>
+                            <p class="d-flex justify-content-end"><?php echo date("d.m.y",strtotime($value['date']));?></p>
                         </div>
                         <div class="body">
                             <p class="float-none"><?php echo $value['text'];?></p>
