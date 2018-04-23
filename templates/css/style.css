@@ -133,3 +133,9 @@ body{
 .message-item{
     padding: 10px 15px;
 }
+.messages{
+    height: 430px;
+}
+.send_message{
+    margin: 0 15px 10px 10px;
+}

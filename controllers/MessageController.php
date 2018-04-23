@@ -30,6 +30,11 @@ class MessageController
         foreach ($user_id as $key => $value){
             $userList[] = User::getUserById($value['from_user_id']);
         }
+        if(isset($_POST['submit'])){
+            $message = $_POST['message'];
+            if(Message::saveMessage($message,$_SESSION['user_id'],$id))
+                header("Location: /messages/$id");
+        }
         require_once(ROOT . '/views/messages/index.php');
         return true;
     }

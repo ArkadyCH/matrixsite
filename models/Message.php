@@ -26,7 +26,7 @@ class Message
     }
     public static function getUserIdByMessageId($id){
         $connect = DataBase::getConnection();
-        $sql = "SELECT DISTINCT from_user_id FROM personal_messages WHERE to_user_id = :id";
+        $sql = "SELECT DISTINCT from_user_id FROM personal_messages WHERE to_user_id = :id ORDER BY from_user_id DESC";
 
         $db = $connect->prepare($sql);
         $db->bindParam(":id" , $id , PDO::PARAM_STR);
