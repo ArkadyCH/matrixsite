@@ -16,9 +16,12 @@ class MessageController
             $text = $_POST['text'];
             $send = $_SESSION['user_id'];
             $recive = $id;
-            if (User::getUserById($send)) {
-                if(Message::getDialog($send , $recive))
-                    $dialog_id = Message::updateDialog($send , $recive);
+            if (User::getUserById($recive)) {
+                if($dialog = Message::getDialog($send , $recive)){
+                    Message::updateDialog($send , $recive , $dialog['id']);
+                    $dialog_id = Message::getIdLastDialog($send , $recive);
+                }
+
                 else
                     $dialog_id = Message::saveDialog($send,$recive);
                 Message::saveMessage($text, $send, $dialog_id);
@@ -38,6 +41,9 @@ class MessageController
     }
     public function actionDialog($id){
         $userId = $_SESSION['user_id'];
+        $dialog = Message::getDialog($userId , $id);
+        if($dialog['recive'] == $userId)
+            Message::setStatusDialog($id ,$userId);
         $dialogs = Message::getAllDialog($userId);
         foreach ($dialogs as $key => $value){
             if(($value['send'] == $id && $value['recive'] == $userId) || ($value['send'] == $userId && $value['recive'] == $id))
@@ -45,8 +51,14 @@ class MessageController
         }
         if (isset($_POST['submit'])) {
             $message = $_POST['message'];
-            if (Message::saveMessage($message, $_SESSION['user_id'], $id))
-                header("Location: /messages/$id");
+            if (User::getUserById($id)) {
+                if($dialog){
+                    Message::updateDialog($userId , $id , $dialog['id']);
+                    $dialog_id = Message::getIdLastDialog($userId , $id);
+                }
+                Message::saveMessage($message, $userId, $dialog_id);
+                header("Location: /dialog/$id");
+            }
         }
         require_once(ROOT . '/views/messages/view.php');
         return true;

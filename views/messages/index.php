@@ -16,10 +16,19 @@
             <div class="panel-body">
                 <?php if ($dialogs): ?>
                     <?php foreach ($dialogs as $key => $value): ?>
-                        <div class="user-item">
-                            <a href="/dialog/<?php echo $value['send']; ?>"
-                               class="btn btn-primary"><?php echo User::getUserNameById($value['send']); ?></a>
-                        </div>
+                        <?php if ($value['send'] != $_SESSION['user_id'] || $value['recive'] != $_SESSION['user_id']): ?>
+                            <div class="user-item">
+                                <a href="/dialog/<?php if($value['send'] != $_SESSION['user_id']) echo $value['send']; else echo $value['recive']; ?>"
+                                   class="btn btn-primary">
+                                    <?php
+                                    if($value['send'] != $_SESSION['user_id'])
+                                        echo User::getUserNameById($value['send']);
+                                    else
+                                        echo User::getUserNameById($value['recive']);
+                                    ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>

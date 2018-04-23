@@ -62,18 +62,24 @@ class Message
 
         return $connect->lastInsertId();
     }
-    public static function updateDialog($send , $recive){
+    public static function updateDialog($send , $recive , $id){
         $connect = DataBase::getConnection();
 
-        $sql = "UPDATE dialog SET send = :send , recive = :recive";
+        $sql = "UPDATE dialog SET status = 0 , send = :send , recive = :recive WHERE id = :id";
 
-        $connect->setAttribute(PDO::ATTR_EMULATE_PREPARES,TRUE);
         $db = $connect->prepare($sql);
         $db->bindParam(':send' , $send , PDO::PARAM_STR);
         $db->bindParam(':recive' , $recive , PDO::PARAM_STR);
-        $db->execute();
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
 
-        $id = $connect->prepare("SELECT id FROM dialog WHERE send = :send AND recive = :recive OR send = :recive AND recive = :send");
+        return $db->execute();
+    }
+    public static function getIdLastDialog($send , $recive){
+        $connect = DataBase::getConnection();
+
+        $sql = "SELECT id FROM dialog WHERE send = :send AND recive = :recive OR send = :recive AND recive = :send";
+
+        $id = $connect->prepare($sql);
         $id->bindParam(':send' , $send , PDO::PARAM_STR);
         $id->bindParam(':recive' , $recive , PDO::PARAM_STR);
         $id->execute();
@@ -92,14 +98,14 @@ class Message
         $db->bindParam(':recive' , $recive , PDO::PARAM_STR);
         $db->execute();
 
-        if($result = $db->fetchAll())
+        if($result = $db->fetch())
             return $result;
         return false;
     }
     public static function getAllDialog($recive){
         $connect = DataBase::getConnection();
 
-        $sql = "SELECT * FROM dialog WHERE recive = :recive";
+        $sql = "SELECT * FROM dialog WHERE recive = :recive OR send = :recive";
 
         $db = $connect->prepare($sql);
         $db->bindParam(':recive' , $recive , PDO::PARAM_STR);
@@ -108,5 +114,30 @@ class Message
         if($result = $db->fetchAll())
             return $result;
         return false;
+    }
+    public static function getCountNewMessages($id){
+        $connect = DataBase::getConnection();
+
+        $sql = "SELECT id FROM dialog WHERE recive = :id AND status = 0";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($db->rowCount() != 0)
+            return $db->rowCount();
+        return false;
+    }
+    public static function setStatusDialog($send , $recive){
+        $connect = DataBase::getConnection();
+
+        $sql = "UPDATE dialog SET status = 1 WHERE send = :send AND recive = :recive OR send = :recive AND recive = :send";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':send' , $send , PDO::PARAM_STR);
+        $db->bindParam(':recive' , $recive , PDO::PARAM_STR);
+        $db->execute();
+
+        return $db->execute();
     }
 }
