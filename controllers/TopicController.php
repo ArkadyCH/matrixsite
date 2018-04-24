@@ -85,4 +85,11 @@ class TopicController
         require_once(ROOT . '/views/topic/edit.php');
         return true;
     }
+    public function actionDeleteMessage($topic_id,$id){
+        if (Admin::isAdmin() || $_SESSION['user_id'] == User::getUserIdByMessage($id)){
+            Forum::deleteTopicMessage($id);
+            header("Location: /topic/$topic_id");
+        }else
+            die('У вас нет прав выполнять эту операцию');
+    }
 }

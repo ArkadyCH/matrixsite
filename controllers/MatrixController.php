@@ -16,7 +16,6 @@ class MatrixController
         return true;
     }
 
-
     public function actionInfographic(){
         $files = Soft::getFileStats(1);
         foreach ($files as $key => $value) {

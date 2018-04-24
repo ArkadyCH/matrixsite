@@ -238,4 +238,15 @@ class Forum
             return true;
         return false;
     }
+    public static function deleteTopicMessage($id){
+        $connect = DataBase::getConnection();
+        $sql = "DELETE FROM topic_messages WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(':id' , $id , PDO::PARAM_STR);
+
+        if($db->execute())
+            return true;
+        return false;
+    }
 }

@@ -204,4 +204,19 @@ class User
             return $result['user_id'];
         return false;
     }
+    public static function getUserIdByMessage($id){
+        $connect = DataBase::getConnection();
+        $sql = "SELECT user_id FROM topic_messages WHERE id = :id";
+
+        $db = $connect->prepare($sql);
+        $db->bindParam(":id" , $id , PDO::PARAM_STR);
+        $db->execute();
+
+        if($result = $db->fetch()){
+            $user = self::getUserById($result['user_id']);
+            $user_id = $user['id'];
+            return $user_id;
+        }
+        return false;
+    }
 }

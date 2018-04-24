@@ -29,8 +29,8 @@
 
 <?php if ($messages): ?>
     <?php foreach ($messages as $key => $value): ?>
-        <div class="forum-box center">
-            <div class="user float-left">
+        <div class="message-box center">
+            <div class="message-user float-left">
                 <?php $user_message = User::getUserById($value['user_id']); ?>
                 <div class="user_img_message float-left">
                     <img class="center" src="<?php echo User::getImage($value['user_id']); ?>">
@@ -43,6 +43,9 @@
             </div>
             <div class="message">
                 <?php echo $value['message'] ?>
+                <?php if(Admin::isAdmin() || $_SESSION['user_id'] == User::getUserIdByMessage($value['id'])): ?>
+                <a href="/topic/delete/message/<?php echo $topic[0]['id'];?>/<?php echo $value['id'];?>" class="bottom-right">Удалить</a>
+                <?php endif; ?>
             </div>
         </div>
     <?php endforeach; ?>
