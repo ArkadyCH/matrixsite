@@ -14,8 +14,8 @@
             <div class="user_img">
                 <img class="center" src="<?php echo User::getImage($value['user_id']); ?>">
             </div>
-            <div class="information">
-                <p><?php echo User::getUserNameById($value['user_id']); ?></p>
+            <div class="information text-align">
+                <a href="/profile/<?php echo $value['user_id']; ?>" class="btn btn-link"><?php echo User::getUserNameById($value['user_id']); ?></a>
                 <p>Тем: <?php echo Topic::getCountTopicByUserId($value['user_id']); ?></p>
                 <p>Сообщений: <?php echo Forum::getCountUserMessages($value['user_id']); ?></p>
             </div>
@@ -35,7 +35,7 @@
                 <div class="user_img_message float-left">
                     <img class="center" src="<?php echo User::getImage($value['user_id']); ?>">
                 </div>
-                <div class="information float-left">
+                <div class="information float-left text-align">
                     <p><a href="/profile/<?php echo $value['user_id'];?>"><?php echo $user_message['name']; ?></a></p>
                     <p>Тем: <?php echo Topic::getCountTopicByUserId($value['user_id']); ?></p>
                     <p>Сообщений: <?php echo Forum::getCountUserMessages($user_message['id']); ?></p>
