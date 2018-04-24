@@ -10,6 +10,8 @@ class MessageController
 {
     public function actionCreate($id)
     {
+        if (!User::checkUserSession())
+            die('Сначало авторизируйтесь');
         $text = '';
         $user_id = '';
         if (isset($_POST['submit'])) {
@@ -34,21 +36,31 @@ class MessageController
 
     public function actionIndex()
     {
+        if (!User::checkUserSession())
+            die('Сначало авторизируйтесь');
         $dialogs = Message::getAllDialog($_SESSION['user_id']);
 
         require_once(ROOT . '/views/messages/index.php');
         return true;
     }
     public function actionDialog($id){
+        if (!User::checkUserSession())
+            die('Сначало авторизируйтесь');
         $userId = $_SESSION['user_id'];
+        $inDialog = false;
+        $dialogs = Message::getAllDialog($userId);
+        foreach ($dialogs as $key => $value){
+            if(($value['send'] == $id && $value['recive'] == $userId) || ($value['send'] == $userId && $value['recive'] == $id)){
+                $messageList = Message::getPersonalMessages($value['id']);
+                $inDialog = true;
+            }
+        }
+        if(!$inDialog)
+            die('Данного диалога не существует');
         $dialog = Message::getDialog($userId , $id);
         if($dialog['recive'] == $userId)
             Message::setStatusDialog($id ,$userId);
-        $dialogs = Message::getAllDialog($userId);
-        foreach ($dialogs as $key => $value){
-            if(($value['send'] == $id && $value['recive'] == $userId) || ($value['send'] == $userId && $value['recive'] == $id))
-                $messageList = Message::getPersonalMessages($value['id']);
-        }
+
         if (isset($_POST['submit'])) {
             $message = $_POST['message'];
             if (User::getUserById($id)) {
