@@ -35,18 +35,6 @@ class Category
             return $result;
         return false;
     }
-    public static function getCategoriesById($id){
-        $connect = DataBase::getConnection();
-        $sql = "SELECT * FROM forum WHERE id = :id";
-
-        $db = $connect->prepare($sql);
-        $db->bindParam(':id' , $id , PDO::PARAM_STR);
-        $db->execute();
-
-        if($result = $db->fetchAll())
-            return $result;
-        return false;
-    }
     public static function deleteCategoryById($id){
         $connect = DataBase::getConnection();
         $sql = "DELETE FROM forum WHERE id = :id";
@@ -54,8 +42,6 @@ class Category
         $db = $connect->prepare($sql);
         $db->bindParam(':id' , $id , PDO::PARAM_STR);
 
-        if($result = $db->execute())
-            return $result;
-        return false;
+        return $db->execute();
     }
 }

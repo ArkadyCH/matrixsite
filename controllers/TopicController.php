@@ -49,10 +49,9 @@ class TopicController
             if (Topic::saveTopic($title_name, $description, $parent_id, $user_id, $type_id, $lvl)) {
                 header('Location: /forum');
             } else {
-                echo 'misha vse xuina';
+                echo 'ERROR topic dont save';
             }
         }
-        $title_name = Forum::getListSection();
         require_once(ROOT . '/views/topic/create.php');
         return true;
     }
@@ -77,7 +76,7 @@ class TopicController
                 if (Topic::editTopic($id, $title_name, $description)) {
                     header("Location: /topic/$id");
                 } else
-                    echo 'fuck';
+                    echo 'ERROR topic dont edit';
 
             }
         } else

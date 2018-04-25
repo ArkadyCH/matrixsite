@@ -9,20 +9,19 @@
 
 <div class="forum-box center">
     <h1 class="text-align">Форум</h1>
-    <?php foreach ($listSections as $key => $value): ?>
         <div class="section">
             <table class="table shadow" style="height: 100px;">
                 <tbody>
                 <tr class="table-info">
                     <td colspan="4">
-                        <?php echo $value['title_name']; ?>
-                        <?php if ($isLogged && ($isTopics || !$listCategories) && $value['type_id'] != 1): ?>
-                            <a class="float-right" href="/topic/create/<?php echo $value['id']; ?>">Создать
+                        <?php echo $section['title_name']; ?>
+                        <?php if ($isLogged && ($isTopics || !$listCategories) && $section['type_id'] != 1): ?>
+                            <a class="float-right" href="/topic/create/<?php echo $section['id']; ?>">Создать
                                 тему</a>
                         <?php endif; ?>
                     </td>
                 </tr>
-                <?php if (isset($listCategories) && $listCategories[$key]['type_id'] == 2): ?>
+                <?php if (isset($listCategories) && $listCategories[0]['type_id'] == 2): ?>
                     <tr class="table-active">
                         <td class="forumNameTd"></td>
                         <td>Темы</td>
@@ -38,14 +37,14 @@
                                 <?php echo Topic::getCountTopic($category['id']); ?>
                             </td>
                             <td class="align-middle text-align">
-                                <?php echo Forum::getCountAllMessages($value['id']); ?>
+                                <?php echo Forum::getCountAllMessages($section['id']); ?>
                             </td>
                             <td class="align-middle">
                                 <?php echo $category['description'] ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                <?php elseif ($listCategories[$key]['type_id'] == 3): ?>
+                <?php elseif ($listCategories[0]['type_id'] == 3): ?>
                     <tr class="table-active">
                         <td class="forumNameTd"></td>
                         <td class="align-middle text-align">Ответов</td>
@@ -81,7 +80,6 @@
                 </tbody>
             </table>
         </div>
-    <?php endforeach; ?>
 </div>
 
 </body>

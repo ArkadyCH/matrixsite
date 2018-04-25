@@ -10,7 +10,7 @@
 <div class="forum-box center">
     <h1 class="text-align">Админ панель</h1>
     <div class="text-align">
-        <a class="btn btn-link" href="category/create/category">Создать категорию</a>
+        <a class="btn btn-link" href="category/create">Создать категорию</a>
         <a class="btn btn-link" href="category/delete">Удалить категорию/тему</a>
         <a class="btn btn-link" href="category/edit">Изменить категорию/тему</a>
         <br>

@@ -17,7 +17,7 @@ return array(
     'user/edit/([0-9]+)' => 'user/edit/$1',
     'user/delete' => 'user/delete',
 
-    'category/create/category' => 'category/create',
+    'category/create' => 'category/create',
     'category/([0-9]+)' => 'category/view/$1',
     'category/delete' => 'category/delete',
     'category/edit' => 'category/edit',
