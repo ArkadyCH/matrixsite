@@ -42,6 +42,8 @@ class Soft
         $db = $connect->query($sql);
         $db->execute();
 
+        $string_to_search = 1;
+
         if ($row = $db->fetch())
             $string_to_search = $row['id'];
 
@@ -52,7 +54,10 @@ class Soft
         }
         $result['id'] = $string_to_search;
         $result['filename'] = $filename;
-        return $result;
+
+        if($result['filename'])
+            return $result;
+        return false;
     }
 
     public static function setFileStats($user_id, $count, $file_id)
