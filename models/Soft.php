@@ -42,11 +42,8 @@ class Soft
         $db = $connect->query($sql);
         $db->execute();
 
-        if ($row = $db->fetch())
-            $result = $row['filename'];
-
-        if($result)
-            return $result;
+        if($result = $db->fetch())
+            return $result['filename'];
         return false;
     }
 
