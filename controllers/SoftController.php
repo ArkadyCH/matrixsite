@@ -69,7 +69,7 @@ class SoftController
                     if ($value == substr($_FILES['soft']['name'], -3)) {
                         $id = Soft::saveFile("$name.$value");
                         Soft::setFileStatus($id);
-                        move_uploaded_file($_FILES["soft"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/softs/$id.$value");
+                        move_uploaded_file($_FILES["soft"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/softs/$name.$value");
                         $result = true;
                     }
                 }

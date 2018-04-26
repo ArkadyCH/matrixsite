@@ -37,25 +37,15 @@ class Soft
     public static function getCurrentFile()
     {
         $connect = DataBase::getConnection();
-        $sql = "SELECT id FROM files WHERE status = 'current'";
+        $sql = "SELECT filename FROM files WHERE status = 'current'";
 
         $db = $connect->query($sql);
         $db->execute();
 
-        $string_to_search = 1;
-
         if ($row = $db->fetch())
-            $string_to_search = $row['id'];
+            $result = $row['filename'];
 
-        $dir = opendir($_SERVER['DOCUMENT_ROOT'] . "/upload/softs/");
-
-        while (($file = readdir($dir)) !== false) {
-            $filename = strstr($file, $string_to_search);
-        }
-        $result['id'] = $string_to_search;
-        $result['filename'] = $filename;
-
-        if($result['filename'])
+        if($result)
             return $result;
         return false;
     }
