@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="">Matrix / Site</a>
+        <a class="navbar-brand js-scroll-trigger" href="/">Matrix / Site</a>
     </div>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">

@@ -27,4 +27,8 @@ class MatrixController
         require_once(ROOT . '/views/matrix/infographic.php');
         return true;
     }
+    public function actionWelcome(){
+        require_once(ROOT . '/views/matrix/welcome.php');
+        return true;
+    }
 }
