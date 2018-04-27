@@ -146,7 +146,7 @@ class UserController
                     $errors[] = 'Файл небыл загружен!';
             }
             if ($result) {
-                header('Location: /cabinet');
+                header("Location: /profile/$id");
             }
         }
         require_once(ROOT . '/views/user/edit.php');

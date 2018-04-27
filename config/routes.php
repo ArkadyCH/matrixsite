@@ -3,8 +3,6 @@
  * Маршруты ,возвращает массив с маршрутами в виде "путь для сравнения с url из адресной строки' => 'Имя контроллера / Имя экшена'
  */
 return array(
-
-
     'download/soft/([a-zA-Z0-9]+).([a-z]+)' => 'soft/download/$1/$2',
     'download' => 'soft/index',
     'upload/soft' => 'soft/upload',
