@@ -9,8 +9,7 @@
 class DataBase
 {
     public static function getConnection(){
-        $paramsPath = ROOT.'/config/dbparams.php';
-        $params = include($paramsPath);
+        $params = parse_ini_file(ROOT."/config/dbparams.ini");
 
         $dsn = "mysql:host={$params['host']};dbname={$params['name']}";
         $db = new PDO($dsn, $params['user'], $params['password']);
