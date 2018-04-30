@@ -28,6 +28,7 @@ class MatrixController
         return true;
     }
     public function actionWelcome(){
+        //throw new Exception('dawdw');
         require_once(ROOT . '/views/matrix/welcome.php');
         return true;
     }

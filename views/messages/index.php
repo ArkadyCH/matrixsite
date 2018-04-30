@@ -14,7 +14,7 @@
                 <p>Пользователи</p>
             </div>
             <div class="panel-body">
-                <?php if ($dialogs): ?>
+
                     <?php foreach ($dialogs as $key => $value): ?>
                         <?php if ($value['send'] != $_SESSION['user_id'] || $value['recive'] != $_SESSION['user_id']): ?>
                             <div class="user-item">
@@ -30,7 +30,7 @@
                             </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
-                <?php endif; ?>
+
             </div>
         </div>
 

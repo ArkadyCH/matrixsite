@@ -8,6 +8,11 @@
     define('ROOT',dirname(__FILE__));
     require_once (ROOT.'/components/AutoLoad.php');
 
+    // Вызываем обработчик ошибок
+    $handler = new Handler();
+    $handler->register();
+
     // Вызов роутера
     $router = new Router();
     $router->run();
+
