@@ -173,10 +173,13 @@ class UserController
     {
         if (!User::checkUserSession())
             die('Вы не авторизированы');
-        $usver = User::getUserById($id);
-        $permission = User::getUserPermission($usver['id']);
-        $messages = Forum::getCountUserMessages($usver['id']);
-        $topics = Topic::getCountTopicByUserId($usver['id']);
+        $user = User::getUserById($id);
+        if(!$user){
+            die('Профиль не существует');
+        }
+        $permission = User::getUserPermission($user['id']);
+        $messages = Forum::getCountUserMessages($user['id']);
+        $topics = Topic::getCountTopicByUserId($user['id']);
         require_once(ROOT . '/views/user/profile.php');
         return true;
     }

@@ -10,8 +10,10 @@ class CategoryController
 {
     public function actionView($id){
         $isLogged = User::checkUserSession();
-        $isTopics =  Forum::sectionIsTopics($id);
         $section= Forum::getElementById($id);
+        if(!$section)
+            die('Категории не существует');
+        $isTopics =  Forum::sectionIsTopics($id);
         $listCategories = Category::getCategoriesBySectionId($id);
 
         require_once(ROOT . '/views/category/view.php');
