@@ -37,13 +37,13 @@ class Soft
     public static function getCurrentFile()
     {
         $connect = DataBase::getConnection();
-        $sql = "SELECT filename FROM files WHERE status = 'current'";
+        $sql = "SELECT id,filename FROM files WHERE status = 'current'";
 
         $db = $connect->query($sql);
         $db->execute();
 
         if($result = $db->fetch())
-            return $result['filename'];
+            return $result;
         return false;
     }
 

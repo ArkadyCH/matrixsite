@@ -7,8 +7,9 @@
 <body>
 <?php include ROOT . '/views/matrix/header.php'; ?>
 
-<div class="forum-box center">
-    <h1 class="text-align">Форум</h1>
+<?php if ($section): ?>
+    <div class="forum-box center">
+        <h1 class="text-align">Форум</h1>
         <div class="section">
             <table class="table shadow" style="height: 100px;">
                 <tbody>
@@ -80,7 +81,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+<?php endif; ?>
+<div class="forum-box center">
+    <h1 class="text-align">Категории не существует</h1>
 </div>
-
 </body>
 </html>

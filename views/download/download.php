@@ -11,7 +11,7 @@
     <h1 class="text-align">Загрузить программу прямо сейчас</h1>
     <?php if (User::checkUserSession()): ?>
         <?php if($file):?>
-            <a class="btn btn-primary col-centered" href="/download/soft/<?php echo $file; ?>"><i
+            <a class="btn btn-primary col-centered" href="/download/soft/<?php echo $file['filename']; ?>"><i
                         class="fa fa-download"></i></a>
         <?php else:?>
             <p class="text-align">В данный момент софт на скачивание не найден</p>
